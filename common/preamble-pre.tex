@@ -1,0 +1,374 @@
+%!TEX root = ../dissertation.tex
+\usepackage{etoolbox}
+\usepackage{pdflscape}
+\usepackage{geometry}
+\usepackage{xparse}
+
+%% Various maths
+\usepackage{amsthm,amsmath,amscd,amsfonts,amssymb,mathtools,amsthm}
+
+%% Localization
+\usepackage[main=russian,german,english]{babel}
+\usepackage{fontspec}
+\usepackage{iflang}
+
+
+%% Fonts
+\setmonofont{Courier New}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+
+%% Page geometry
+\geometry{a5paper, top=14mm, bottom=14mm, inner=18mm, outer=10mm, footskip=5mm, nomarginpar}
+\setlength{\topskip}{0pt}
+\setlength{\footskip}{12.3pt}
+\SingleSpacing
+
+\makeevenhead{plain}{}{\thepage}{}
+\makeoddhead{plain}{}{\thepage}{}
+\makeevenfoot{plain}{}{}{}
+\makeoddfoot{plain}{}{}{}
+\pagestyle{plain}
+
+%% Penalties
+\tolerance=1414
+\hbadness=1414
+\emergencystretch=1.5em
+\hfuzz=0.3pt
+\vfuzz=\hfuzz
+\clubpenalty=10000
+\widowpenalty=10000
+\brokenpenalty=4991
+
+%% Tuning of Table of Contents
+\renewcommand{\cftchapterdotsep}{\cftdotsep}
+\setrmarg{2.55em plus1fil}
+\renewcommand{\cftchapterpagefont}{\normalfont}
+\renewcommand{\cftchapterleader}{\cftdotfill{\cftchapterdotsep}}
+\renewcommand{\cftchapteraftersnum}{.\space}
+\AtBeginDocument{\setsecnumformat{\csname the#1\endcsname\quad}}
+\renewcommand*{\cftappendixname}{\appendixname\space}
+
+%% Tuning of List of Figures/Tables
+\makeatletter
+\renewcommand{\@tocrmarg}{4em}
+\renewcommand{\@pnumwidth}{3em}
+\makeatother
+
+%% Fonts and intervals of the basic things
+\newcommand{\basegostsectionfont}{\fontsize{10pt}{12pt}\selectfont\bfseries}
+\newlength{\gostindent}
+\setlength{\gostindent}{30pt}
+\setbeforesecskip{\gostindent}
+\setaftersecskip{\gostindent}
+\setbeforesubsecskip{\gostindent}
+\setaftersubsecskip{\gostindent}
+\setbeforesubsubsecskip{\gostindent}
+\setaftersubsubsecskip{\gostindent}
+
+\makechapterstyle{thesisgost}{%
+\chapterstyle{default}%
+\setlength{\beforechapskip}{0pt}%
+\setlength{\midchapskip}{0pt}%
+\setlength{\afterchapskip}{\gostindent}%
+\renewcommand*{\chapnamefont}{\basegostsectionfont}%
+\renewcommand*{\chapnumfont}{\basegostsectionfont}%
+\renewcommand*{\chaptitlefont}{\basegostsectionfont}%
+\renewcommand*{\chapterheadstart}{}%
+\renewcommand*{\afterchapternum}{\quad}%
+\renewcommand*{\printchapternum}{\centering\chapnumfont\thechapter}%
+\renewcommand*{\printchaptername}{}%
+\renewcommand*{\printchapternonum}{\centering}}
+
+\makeatletter
+\makechapterstyle{thesisgostchapname}{%
+    \chapterstyle{thesisgost}
+    \renewcommand*{\printchapternum}{\chapnumfont\thechapter}
+    \renewcommand*{\printchaptername}{\centering\chapnamefont\@chapapp} %
+}
+\makeatother
+
+\chapterstyle{thesisgost}
+\setsecheadstyle{\basegostsectionfont\centering}
+\setsecindent{0pt}
+\setsubsecheadstyle{\basegostsectionfont\centering}
+\setsubsecindent{0pt}
+\setsubsubsecheadstyle{\basegostsectionfont\centering}
+\setsubsubsecindent{0pt}
+\sethangfrom{\noindent #1}
+
+\chapterstyle{thesisgostchapname}
+\renewcommand*{\cftchaptername}{\chaptername\space}
+
+%% Making all the counters global
+\counterwithout{equation}{chapter}
+\counterwithout{equation}{section}
+\counterwithout{equation}{subsection}
+\counterwithout{figure}{chapter}
+\counterwithout{figure}{section}
+\counterwithout{figure}{subsection}
+\counterwithout{table}{chapter}
+\counterwithout{table}{section}
+\counterwithout{table}{subsection}
+
+\AtBeginDocument{%
+\regtotcounter{totalcount@figure}%
+\regtotcounter{totalcount@table}%
+\regtotcounter{TotPages}%
+}
+
+%% Some not yet used magic to form Russian messages about sizes and counts
+%% http://www.linux.org.ru/forum/general/6993203#comment-6994589 (используется totcount)
+\makeatletter
+\def\formbytotal#1#2#3#4#5{%
+    \newcount\@c
+    \@c\totvalue{#1}\relax
+    \newcount\@last
+    \newcount\@pnul
+    \@last\@c\relax
+    \divide\@last 10
+    \@pnul\@last\relax
+    \divide\@pnul 10
+    \multiply\@pnul-10
+    \advance\@pnul\@last
+    \multiply\@last-10
+    \advance\@last\@c
+    \total{#1}~#2%
+    \ifnum\@pnul=1#5\else%
+    \ifcase\@last#5\or#3\or#4\or#4\or#4\else#5\fi
+    \fi
+}
+\makeatother
+
+%% A special environment for locale-dependent commands
+%% Usage: \newlocalizedcommand{\YourCommandName}{expansion in English}{expansion in Russian}
+%%        \renewlocalizedcommand{\YourCommandName}{expansion in English}{expansion in Russian}
+\newcommand{\newlocalizedcommand}[3]{\newcommand{#1}{\IfLanguageName{russian}{#3}{#2}}}
+\newcommand{\renewlocalizedcommand}[3]{\renewcommand{#1}{\IfLanguageName{russian}{#3}{#2}}}
+
+%% Theorems (localized) %%
+\newlocalizedcommand{\definitionname}{Definition}{Определение}
+\newlocalizedcommand{\corollaryname}{Corollary}{Следствие}
+\newlocalizedcommand{\theoremname}{Theorem}{Утверждение}
+\newlocalizedcommand{\lemmaname}{Lemma}{Лемма}
+
+\theoremstyle{definition}
+\newtheorem{definition}{\definitionname}
+\newtheorem{theorem}{\theoremname}
+\newtheorem{lemma}{\lemmaname}
+\newtheorem{corollary}{\corollaryname}
+
+%% Paragraph formatting %%
+\usepackage{indentfirst}
+\AtBeginDocument{\setlength{\parindent}{2.5em}}
+
+%% Enumerations (partially localized) %%
+\usepackage{enumitem}
+\setlist{nosep,labelindent=\parindent,leftmargin=*}
+
+\makeatletter
+\def\asbukx#1{\expandafter\@asbukx\csname c@#1\endcsname}
+\def\@asbukx#1{\ifcase#1\or a\or б\or в\or г\or д\or е\or ж\or и\or к\or л\or м\or н\or п\or р\or с\or т\or у\or ф\or х\or ц\or ш\or щ\or э\or ю\or я\fi}
+\def\Asbukx#1{\expandafter\@Asbukx\csname c@#1\endcsname}
+\def\@Asbukx#1{\ifcase#1\or А\or Б\or В\or Г\or Д\or Е\or Ж\or И\or К\or Л\or М\or Н\or П\or Р\or С\or Т\or У\or Ф\or Х\or Ц\or Ш\or Щ\or Э\or Ю\or Я\fi}
+\AddEnumerateCounter{\Asbukx}{\@Asbukx}{М}
+\AddEnumerateCounter{\asbukx}{\@asbukx}{м}
+\makeatother
+
+\renewcommand{\labelitemi}{\normalfont\bfseries{--}}
+\renewcommand\labelenumii{\arabic{enumii})}
+\renewcommand\theenumii{\arabic{enumii}}
+\renewlocalizedcommand{\labelenumi}{\alph{enumi})}{\asbukx{enumi})}
+\renewlocalizedcommand{\theenumi}{\alph{enumi}}{\asbukx{enumi}}
+
+
+%% Tuning of how floats look like
+% We use floatrow/caption instead of memoir's poorly-working built-ins
+\let\newfloat\undefined
+\usepackage{caption}
+\usepackage{floatrow}
+\usepackage{subcaption}
+
+%% Babel uses its own way to control captions, adhere to it
+\addto{\captionsenglish}{%
+\renewcommand{\figurename}{Figure}%
+\renewcommand{\contentsname}{Contents}%
+%\renewcommand{\ALG@name}{Algorithm}
+}
+\addto{\captionsrussian}{%
+\renewcommand{\figurename}{Рисунок}%
+\renewcommand{\contentsname}{Содержание}%
+%\makeatletter
+%\renewcommand{\ALG@name}{Листинг}%
+%\makeatother
+\renewcommand{\algorithmname}{Листинг}%
+}
+
+\floatsetup[figure]{style=plain, capposition=bottom}
+\captionsetup[figure]{
+    labelsep=endash,
+    singlelinecheck=false,
+    labelfont={normalsize,md},
+    justification=centering,
+    position=bottom
+}
+\floatsetup[table]{style=plain, capposition=top}
+\captionsetup[table]{
+    labelsep=endash,
+    singlelinecheck=false,
+    labelfont={normalsize,md},
+    justification=justified,
+    position=top
+}
+\floatsetup[algorithm]{style=plain, capposition=top}
+\captionsetup[algorithm]{
+    labelsep=endash,
+    singlelinecheck=false,
+    labelfont={normalsize,md},
+    justification=justified,
+    position=top
+}
+%\floatsetup[lstlisting]{style=plain, capposition=top}
+%\captionsetup[lstlisting]{
+%    labelsep=endash,
+%    singlelinecheck=false,
+%    labelfont={normalsize,md},
+%    justification=justified,
+%    position=top
+%}
+
+%% Tuning of table-of-contents
+
+\settocdepth{subsection}            % до какого уровня подразделов выносить в оглавление
+\setsecnumdepth{subsection}         % до какого уровня нумеровать подразделы
+
+%% Custom math fonts
+
+\usepackage{mathrsfs}
+
+%% Graphics
+
+\usepackage[dvipsnames, table, hyperref, cmyk]{xcolor}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest} 
+
+% Include articles
+\usepackage[final]{pdfpages}
+
+%% Tables %%
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow,makecell}
+\usepackage{hhline}
+\usepackage{adjustbox}
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+%% Hyperref %%
+\usepackage{hyperref}
+\definecolor{linkcolor}{rgb}{0,0,0}
+\definecolor{citecolor}{rgb}{0,0,0}
+\definecolor{urlcolor}{rgb}{0,0,0}
+
+% No hypersetup here, as it needs some information not available here
+
+%% Algorithmic environments %%
+%\usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage[noend]{algpseudocode}
+%\usepackage{amsmath}, amsthm,amsfonts,amssymb,amscd}
+
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+\algnewcommand\algorithmicto{\textbf{to}}
+\algrenewtext{For}[3] {\algorithmicfor\ $#1 \gets #2$ \algorithmicto\ $#3$ \algorithmicdo}
+\algnewcommand\Continue{\textbf{continue}}
+\algnewcommand\AndL{\textbf{and} }
+\algnewcommand\OrL{\textbf{or} }
+\algnewcommand\True{\textbf{True}}
+\algnewcommand\False{\textbf{False}}
+
+%% Counters
+\usepackage[figure,table]{totalcount}
+\usepackage{totcount}
+\usepackage{totpages}
+
+%% Misc localization commands %%
+\let\origle\le   \renewlocalizedcommand{\le}{\origle}{\leqslant}
+\let\origleq\leq \renewlocalizedcommand{\leq}{\origleq}{\leqslant}
+\let\origge\ge   \renewlocalizedcommand{\ge}{\origge}{\geqslant}
+\let\origgeq\geq \renewlocalizedcommand{\geq}{\origgeq}{\geqslant}
+\let\origtan\tan \renewlocalizedcommand{\tan}{\origtan}{\operatorname{tg}}
+\let\origcot\cot \renewlocalizedcommand{\cot}{\origcot}{\operatorname{ctg}}
+\let\origcsc\csc \renewlocalizedcommand{\csc}{\origcsc}{\operatorname{cosec}}
+\let\origempty\emptyset \renewlocalizedcommand{\emptyset}{\origempty}{\varnothing}
+
+%% Misc technical things %%
+\newcommand{\resetfloatcounters}{%
+\setcounter{figure}{0}%
+\setcounter{table}{0}%
+\setcounter{theorem}{0}%
+\setcounter{lemma}{0}%
+\setcounter{definition}{0}%
+\setcounter{corollary}{0}%
+\setcounter{footnote}{0}%
+}
+
+%% Bibliography packages and configuration
+
+\usepackage{csquotes} % biblatex рекомендует его подключать. Пакет для оформления сложных блоков цитирования.
+
+%%% Загрузка пакета с основными настройками %%%
+\makeatletter
+\usepackage[backend=biber, bibencoding=utf8, sorting=none, style=gost-numeric, language=autobib,
+            autolang=other, defernumbers=true, sortcites=true, doi=false, isbn=false, movenames=false, maxnames=99]{biblatex}
+\ltx@iffilelater{biblatex-gost.def}{2017/05/03}%
+{%\toggletrue{bbx:gostbibliography}%
+\renewcommand*{\revsdnamepunct}{\addcomma}}{}
+\makeatother
+
+\renewcommand*{\newblockpunct}{\addperiod\addnbspace---\space\bibsentence}
+
+\DefineBibliographyStrings{english}{pages = {p\adddot}}
+
+\DefineBibliographyExtras{russian}{%
+  \protected\def\bibrangedash{--\penalty\value{abbrvpenalty}}% almost unbreakable dash
+  \protected\def\bibdaterangesep{\bibrangedash}%тире для дат
+}
+\DefineBibliographyExtras{english}{%
+  \protected\def\bibrangedash{--\penalty\value{abbrvpenalty}}% almost unbreakable dash
+  \protected\def\bibdaterangesep{\bibrangedash}%тире для дат
+}
+
+%Set higher penalty for breaking in number, dates and pages ranges
+\setcounter{abbrvpenalty}{10000} % default is \hyphenpenalty which is 12
+%Set higher penalty for breaking in names
+\setcounter{highnamepenalty}{10000} % If you prefer the traditional BibTeX behavior (no linebreaks at highnamepenalty breakpoints), set it to ‘infinite’ (10 000 or higher).
+\setcounter{lownamepenalty}{10000}
+
+%% An environment which rewrites \cite to be \footfullcite for citations not in the author's list
+\makeatletter
+\newtoggle{footnotized@value}\togglefalse{footnotized@value}
+
+\DeclareDocumentCommand{\trickycite}{oom}{%
+\filteredcite{#3}%
+\IfNoValueTF{#2}{%
+\IfNoValueTF{#1}{%
+% no #1 no #2
+\iftoggle{footnotized@value}{\unspace\footfullcite{#3}}{\oldcite{#3}}%
+}{%
+% yes #1 no #2
+\iftoggle{footnotized@value}{\unspace\footfullcite[#1]{#3}}{\oldcite[#1]{#3}}%
+}}{
+% yes #1 yes #2
+\iftoggle{footnotized@value}{\unspace\footfullcite[#1][#2]{#3}}{\oldcite[#1][#2]{#3}}%
+}}%
+\newenvironment{footnotizeexcept}[1]{\begingroup%
+\DeclareCiteCommand{\filteredcite}{}{\ifkeyword{#1}{\global\togglefalse{footnotized@value}}{\global\toggletrue{footnotized@value}}}{}{}%
+\let\oldcite\cite\let\cite\trickycite}{\let\cite\oldcite\endgroup}
+\makeatother
+

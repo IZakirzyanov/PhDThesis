@@ -1,0 +1,44 @@
+%!TEX root = ../dissertation.tex
+
+%%% This is a place to put all definitions needed for this particular thesis to work
+
+% Various definitions depending on how the bibliography is done
+
+\addbibresource{dissertation.bib}
+\DeclareSourcemap{
+    \maps{
+        \map{
+            \step[fieldsource=medium, match=\regexp{Электронный\s+ресурс}, final]
+            \step[fieldset=media, fieldvalue=eresource]
+        }
+    }
+}
+
+% Definitions and includes related for the text
+
+\DeclareRobustCommand{\todo}{\textcolor{black}}
+\newcommand{\revise}[1]{\textcolor{red}{#1}}
+\graphicspath{{img/}}
+
+\newcommand{\hamm}[1]{\mathcal{H}(#1)}
+\newcommand{\tobinary}[1]{\mathcal{B}(#1)}
+\newcommand{\theop}{\mathcal{X}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\pgfplotscreateplotcyclelist{myplotcycle}{%
+black\\%1
+red!80!black\\%2
+violet!80!black\\%3
+gray!80!black\\%4
+orange\\%5
+brown!80!black\\%6
+cyan!80!black\\%
+green!70!black\\%7
+green\\%8
+blue!60!black\\%9
+teal\\%10
+magenta!70!black\\%11
+yellow!90!black\\%12
+}

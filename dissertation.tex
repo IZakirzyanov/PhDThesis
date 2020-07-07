@@ -1,0 +1,55 @@
+\RequirePackage[l2tabu,orthodox]{nag}
+\documentclass[a5paper,10pt,twoside,openany,article]{memoir}
+
+\input{common/preamble-pre}
+\input{common/preamble-userdefs}
+\input{common/preamble-userdata}
+\input{common/preamble-markups}
+\input{common/preamble-post}
+
+\begin{document}
+
+% Обрезка титульников
+\begin{otherlanguage}{russian}\thetitlepage\end{otherlanguage}
+\begin{otherlanguage}{english}\thetitlepage\end{otherlanguage}
+
+%Оглавление
+\ifoddpage\null\else\newpage\thispagestyle{empty}\null\newpage\fi
+\clearpage\tableofcontents*\newpage
+\newcounter{savedpage}
+\addtocounter{savedpage}{\value{page}}
+
+% Рефераты на русском и английском языках
+\thesynopsis{russian}{Р}{labauthor:zakirzyanov}{Synopsis/content-ru}
+% \thesynopsis{english}{S}{labauthor:zakirzyanov}{Synopsis/content-en}
+
+% Основной текст диссертации
+\setcounter{page}{\value{savedpage}}
+\resetfloatcounters
+% \include{Dissertation/introduction}    % Введение
+% \include{Dissertation/part1}           % Глава 1
+% \include{Dissertation/conclusion}      % Заключение
+
+% \clearpage\urlstyle{rm}\printbibliography\urlstyle{tt}
+% \clearpage\listoffigures
+% \clearpage\listoftables
+% \newpage
+
+%%% Настройки для приложений
+% \appendix
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+%\counterwithin{algorithm}{chapter}
+%\counterwithin{lstlisting}{chapter}
+\renewcommand{\thechapter}{\Asbukx{chapter}}
+
+% \include{Dissertation/appendix}        % Приложения
+
+% \clearpage
+\chapter*{Публикации} \addcontentsline{toc}{chapter}{Публикации}
+\includepdf[pages=-]{Papers/2015-LATA.pdf}
+\includepdf[pages=-]{Papers/2017-DataMod.pdf}
+\includepdf[pages=-]{Papers/2019-LATA.pdf}
+\includepdf[pages=-]{Papers/2020-Vestnik.pdf}
+
+\end{document}

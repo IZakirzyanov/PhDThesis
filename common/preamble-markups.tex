@@ -1,0 +1,83 @@
+%!TEX root = ../dissertation.tex
+%% Common misc %%
+
+\newlocalizedcommand{\textAsManuscript}{As a manuscript}{На правах рукописи}
+\newlocalizedcommand{\textSpecialty}{Specialty}{Специальность}
+\newlocalizedcommand{\textThesisFulfilsRequirementsOf}{A thesis submitted in fulfillment of the requirements for the degree of}{Диссертация на соискание учёной степени}
+\newlocalizedcommand{\textSupervisorIs}{Scientific advisor:}{Научный руководитель:}
+\newlocalizedcommand{\textSynopsis}{Synopsis}{Реферат}
+\newlocalizedcommand{\textWorkDoneIn}{The research was carried out at}{Работа выполнена в}
+\newlocalizedcommand{\textOpponentsAre}{Official opponents:}{Официальные оппоненты:}
+
+%% Title page %%
+
+\newcommand{\thetitlepage}{
+\setcounter{page}{1}
+\thispagestyle{empty}
+% organization name
+{\centering\thesisOrganizationNominative\par}
+\vspace{0pt plus2fill}
+% organization logo + permissions
+\noindent\begin{tabularx}{\linewidth}{lXr}
+\vspace{0pt}\thesisOrganizationLogo & & \textAsManuscript \\
+\end{tabularx}\par
+\vspace{0pt plus6fill}
+% author
+{\centering\large\thesisAuthorFull\par}
+\vspace{0pt plus1fill}
+% title + specialty
+{\centering\textbf{\large\thesisTitle}\par
+\vspace{0pt plus2fill}
+\textSpecialty\ \thesisSpecialtyNumber~---\par
+\thesisSpecialtyName\par
+\vspace{0pt plus2fill}
+\textThesisFulfilsRequirementsOf\par
+\thesisDegreeGenitive\par}
+\vspace{0pt plus4fill}
+% supervisor
+\begin{flushright}
+\textSupervisorIs\par\supervisorDegree\par\supervisorFull
+\end{flushright}
+% place + date
+\vspace{0pt plus4fill}
+{\centering\thesisCity~--- \thesisYear\par}
+\newpage
+}
+
+%% Synopsis heading misc %%
+
+\newlocalizedcommand{\markupDissertationCouncilSignature}
+{Scientific Secretary of the\par\thesisOrganizationShortGenitive\par Dissertation Council \defenceCouncilNumber,\par\defenceCouncilSecretaryDegree}
+{Ученый секретарь\par диссертационного совета\par\thesisOrganizationShortGenitive\par\defenceCouncilNumber,\par\defenceCouncilSecretaryDegree}
+\newlocalizedcommand{\markupDefenceWillBeAt}
+{The defence will be held on \defenceDateTime~at the meeting of the \thesisOrganizationShortGenitive\ Dissertation Council \defenceCouncilNumber~at \defenceCouncilAddress.}
+{Защита состоится \defenceDateTime~на~заседании диссертационного совета \thesisOrganizationShortGenitive\ \defenceCouncilNumber~по адресу: \defenceCouncilAddress.}
+\newlocalizedcommand{\markupThesisAvailableAt}
+{The thesis is available \thesisInTheLibrary, \thesisLibraryAddress, and on the Web at \thesisURLAddress.}
+{С диссертацией можно ознакомиться \thesisInTheLibrary\ по адресу: \thesisLibraryAddress, а также на сайте \thesisURLAddress.}
+
+%% Synopsis %%
+
+\newcommand{\labelsyn}[1]{\label{#1}}
+\newcommand{\thesynopsis}[4]{
+\begin{otherlanguage}{#1}
+\setcounter{page}{1}
+\begingroup
+\let\extref\ref%
+\renewcommand*{\thepage}{#2.\arabic{page}}
+\renewcommand*{\thefigure}{#2.\arabic{figure}}
+\renewcommand*{\thetable}{#2.\arabic{table}}
+\renewcommand*{\ref}[1]{\extref{syn:#2:##1}}%
+\renewcommand*{\labelsyn}[1]{\label{syn:#2:##1}}%
+\begin{footnotizeexcept}{#3}
+\begin{refsection}
+\resetfloatcounters
+{\centering\Large\textbf{\textSynopsis}\addcontentsline{toc}{chapter}{\textSynopsis}\par}
+\input{#4}
+\nociteallauthorpublications
+\urlstyle{rm}\printauthorpublications\urlstyle{tt}
+\newpage
+\end{refsection}
+\end{footnotizeexcept}
+\endgroup
+\end{otherlanguage}}

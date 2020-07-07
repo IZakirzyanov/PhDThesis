@@ -1,0 +1,113 @@
+%!TEX root = ../dissertation.tex
+
+\newcommand{\thesisSpecialtyNumber}{05.13.17}
+\newlocalizedcommand{\thesisSpecialtyName}{Theoretical foundations of computer science}{Теоретические основы информатики}
+\newlocalizedcommand{\thesisAuthorFull}{Zakirzyanov Ilya Timurovich}{Закирзянов Илья Тимурович}
+\newlocalizedcommand{\thesisAuthorShort}{Zakirzyanov~I.~T.}{Закирзянов~И.~Т.}
+\newlocalizedcommand{\thesisDegreeGenitive}{Doctor of Philosophy}{кандидата технических наук}
+\newlocalizedcommand{\thesisTitle}
+{Deterministic finite automata inference methods using space search pruning when solving Boolean satisfiability problem}
+{Методы генерации детерминированных конечных автоматов с использованием сокращения пространства поиска при решении задачи выполнимости}
+
+\newcommand{\thesisOrganizationEng}{ITMO University}
+\newlocalizedcommand{\thesisOrganizationNominative}{\thesisOrganizationEng}{Университет ИТМО}
+\newlocalizedcommand{\thesisOrganizationLocative}  {\thesisOrganizationEng}{Университете ИТМО}
+\newlocalizedcommand{\thesisOrganizationGenitive}  {\thesisOrganizationEng}{Университета ИТМО}
+\newlocalizedcommand{\thesisOrganizationShortGenitive}{ITMO University}{Университета~ИТМО}
+\newlocalizedcommand{\thesisOrganizationLogo}{\includegraphics[width=0.28\linewidth]{logo_en}}{\includegraphics[width=0.35\linewidth]{logo}}
+
+\newlocalizedcommand{\thesisInTheLibrary}{in the library of \thesisOrganizationGenitive}{в библиотеке \thesisOrganizationGenitive}
+\newlocalizedcommand{\thesisLibraryAddress}{49 Kronversky pr., Saint Petersburg, Russia}{197101, Санкт-Петербург, Кронверкский пр., д.49}
+\newcommand{\thesisURLAddress}{\url{***}}
+
+\newcommand{\thesisYear}{2020}
+\newlocalizedcommand{\thesisCity}{Saint Petersburg}{Санкт-Петербург}
+\newlocalizedcommand{\defenceDateTime}{\revise{on DD.MM.YYYY at HH:MM}}{\revise{DD.MM.YYYY в HH:MM}}
+\newlocalizedcommand{\defenceAddress}{\revise{address, room number}}{\revise{адрес, аудитория}}
+
+\newcommand{\defenceCouncilNumber}{02.18.00}
+\newlocalizedcommand{\defenceCouncilAddress}{49 Kronversky pr., Saint Petersburg, Russia, room \revise{XXX}}{197101, Санкт-Петербург, Кронверкский пр., д.49, аудитория \revise{XXX}}
+\newlocalizedcommand{\defenceCouncilSecretaryFull}{Mouromtsev Dmitry Ilich}{Муромцев Дмитрий Ильич}
+\newlocalizedcommand{\defenceCouncilSecretaryDegree}{Doctor of Philosophy}{канд. техн. наук}
+\newcommand{\defenceCouncilSecretarySignature}{\includegraphics[width=2cm]{secretary-signature.png}}
+
+\newlocalizedcommand{\supervisorFull}{Ulyantsev Vladimir Igorevich}{Ульянцев Владимир Игоревич}
+\newlocalizedcommand{\supervisorShort}{Ulyantsev~V.~I.}{Ульянцев~В.~И.}
+\newlocalizedcommand{\supervisorDegree}{Doctor of Philosophy}{канд. техн. наук}
+
+% \newlocalizedcommand{\opponents}
+% {\textbf{Tulupyev Alexander L'vovich},\par
+%  \revise{Doctor of Physical and Mathematical Sciences},\par
+%  Professor of Informatics Department\par
+%  Federal State Budgetary Educational Institution of\par 
+%  Higher Professional Education \par 
+%  "Saint-Petersburg State University"\par
+%  \vspace{1ex}\par
+%  \textbf{Pavel Bernard Brazdil},\par
+%  Doctor of Philosophy,
+%  Professor of Engineer Faculty, 
+%  Senior Researcher of INESC TEC’s 
+%  Laboratory of Artificial Intelligence and Decision Support,
+%  University of Porto, Porto, Portugal
+% }{\textbf{Тулупьев Александр Львович},\par
+%  доктор физико-математических наук, \par
+%  профессор кафедры информатики\par
+%  федерального государственного бюджетного\par
+%  образовательного учреждения высшего \par
+%  профессионального образования\par
+%  "Санкт-Петербургский государственный университет"\par
+%  \vspace{1ex}\par
+%  \textbf{Pavel Bernard Brazdil},\par
+%  Doctor of Philosophy,
+%  Professor of Engineer Faculty, 
+%  Senior Researcher of INESC TEC’s 
+%  Laboratory of Artificial Intelligence and Decision Support,
+%  University of Porto, Porto, Portugal
+% }
+
+\newcommand{\nociteallauthorpublications}{\nocite{
+zakirzyanov2015LATA,
+zakirzyanov2017DataMode,
+zakirzyanov2019LATA,
+kachalsky2018ICMLA,
+Ovsiannikova2018INDIN,
+zakirzyanov2020Vestnik,
+zakirzyanov-kmu15,
+zakirzyanov-kmu16,
+zakirzyanov-kmu17,
+zakirzyanov-kmu18,
+zakirzyanov-kmu20}}
+
+% Bibliography filters. As of now, they somewhat depend on which publications the author has.
+
+\defbibfilter{thesisVak}{\keyword{labauthor:zakirzyanov}\and\keyword{phd:zakirzyanov}\and\keyword{index:vak}}
+\defbibfilter{thesisIndexed}{\keyword{labauthor:zakirzyanov}\and\keyword{phd:zakirzyanov}\and\not\keyword{index:vak}\and\(\keyword{index:wos}\or\keyword{index:scopus}\)}
+\defbibfilter{thesisEtc}{\keyword{labauthor:zakirzyanov}\and\keyword{phd:zakirzyanov}\and\not\keyword{index:vak}\and\not\keyword{index:wos}\and\not\keyword{index:scopus}\and\not\keyword{phd:program}}
+\defbibfilter{nonThesisVak}{\keyword{labauthor:zakirzyanov}\and\not\keyword{phd:zakirzyanov}\and\keyword{index:vak}}
+\defbibfilter{nonThesisIndexed}{\keyword{labauthor:zakirzyanov}\and\not\keyword{phd:zakirzyanov}\and\not\keyword{index:vak}\and\(\keyword{index:wos}\or\keyword{index:scopus}\)}
+\defbibfilter{nonThesisEtc}{\keyword{labauthor:zakirzyanov}\and\not\keyword{phd:zakirzyanov}\and\not\keyword{index:vak}\and\not\keyword{index:wos}\and\not\keyword{index:scopus}}
+\defbibfilter{thesisPrograms}{\keyword{phd:program}\and\keyword{labauthor:zakirzyanov}\and\keyword{phd:zakirzyanov}}
+
+\newlocalizedcommand{\textDissPubs}{Author's publications on the topic of the thesis}{Публикации автора по теме диссертации}
+\newlocalizedcommand{\textOtherPubs}{Author's publications on other topics}{Публикации автора по другим темам}
+\newlocalizedcommand{\textRangeIndexed}{Publications indexed in Web of Science or Scopus}{Публикации в зарубежных изданиях, индексируемых в базах цитирования Web of Science или Scopus}
+\newlocalizedcommand{\textRangeVak}{Publications indexed in Russian journal included in the List of the Higher Attestation Commission}{Публикации в журналах из перечня ВАК}
+\newlocalizedcommand{\textRangeEtc}{Other publications (in Russian)}{Прочие публикации}
+\newlocalizedcommand{\textProgram}{Registered computer programs}{Свидетельства о государственной регистрации программ для ЭВМ}
+
+\defbibheading{headingDissIndexed}{\clearpage\chapter*{\textDissPubs}\section*{\textRangeIndexed}}
+\defbibheading{headingVak}{\section*{\textRangeVak}}
+\defbibheading{headingEtc}{\section*{\textRangeEtc}}
+\defbibheading{headingOtherIndexed}{\clearpage\chapter*{\textOtherPubs}\section*{\textRangeIndexed}}
+\defbibheading{headingProgram}{\section*{\textProgram}}
+
+\newcommand{\printauthorpublications}{%
+\printbibliography[filter=thesisIndexed,heading=headingDissIndexed]%
+\printbibliography[filter=thesisVak,heading=headingVak]%
+\printbibliography[filter=thesisEtc,heading=headingEtc]%
+\printbibliography[filter=nonThesisIndexed,heading=headingOtherIndexed]%
+\printbibliography[filter=nonThesisVak,heading=headingVak]%
+\printbibliography[filter=nonThesisEtc,heading=headingEtc]%
+\printbibliography[filter=thesisPrograms,heading=headingProgram]%
+}
+

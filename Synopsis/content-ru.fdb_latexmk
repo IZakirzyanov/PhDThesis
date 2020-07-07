@@ -1,0 +1,14 @@
+# Fdb version 3
+["xdvipdfmx"] 0 "content-ru.xdv" "content-ru.pdf" "content-ru" 0
+  "content-ru.xdv" 0 -1 0 "xelatex"
+  (generated)
+  "content-ru.pdf"
+["xelatex"] 1589234321 "content-ru.tex" "content-ru.xdv" "content-ru" 1589234321
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1572595918 33301 a3134070eacafb10b1f371612ce2650d ""
+  "/var/lib/texmf/web2c/xetex/xelatex.fmt" 1587655499 4126406 6549f0bc1499d4a8a8b4bc48ed3e0de0 ""
+  "common/characteristic-ru.tex" 0 -1 0 ""
+  "content-ru.aux" 1589234321 8 a94a2480d3289e625eea47cd1b285758 ""
+  "content-ru.tex" 1589234321 957 1a8dcca1921f2b3fb9202ffcbffee2e7 ""
+  (generated)
+  "content-ru.xdv"
+  "content-ru.log"
