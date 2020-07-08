@@ -23,7 +23,7 @@ cache:
 before_script: cd $TRAVIS_BUILD_DIR/src/
 script:
   # Texliveonfly will download packages automatically
-  - texliveonfly --arguments='-shell-escape' dissertation.tex
+  # texliveonfly --arguments='-shell-escape' dissertation.tex
   # You can use latexmk to automatically handle bibtex and references (recommended)
   - make dissertation 
 
