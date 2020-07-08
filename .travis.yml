@@ -18,7 +18,8 @@ deploy:
   api_key:
     secure: kNF81H4XetPI8HoSxqxhuymoBpXk2HAIehZ45jHYIzVgHxRqsoDPneqOjSfOd1k7Vz2jz5SGreaGKwuXNeRq836xwuSTjd1qQ842rn0YpXXeOc/1IMJ8XT1X98R0ZJpcWD09NpCBqeb9LPaW7sLIbPexQAs/AGX7MA50IDr30+PcfGPUY4391Yi5X3k3wWxfm7qj8LoHyOwsT4LUHN3hveIAHmVhR9Mo42W1q1Qsaqjv+abEcFVAWMgK6HCYXK3uVDnfRwDQ4hq+VgAYntJoovgrzeCo2h7M8110YZtE5KScOXfFeMuxzpCrjY9GoVkZ3vuP1osDVGc3dTLCUJ4s/FJKL2R5lUy3og6k/yzRshuu1vtj105ZCPjY0aNC+uiN++Tr9sJryLb7Xc5q+K6oNyMJbSlFTKspAraJ3LCpaovhKBLWCuG4D7d8t7yTTV2Cox/E0RvX2NBIzevP2lIpTRXXSzReiK62APCGbahh2xFh1IhsjMURxrX0NPSpjpe87PCF7HvMnAulfj7io0tHQamJyFCw3ZKmLGpbvgsVxZpg7vAoLx7LMkF9O9MGAASYksRhscJzaDvcFzGYcidKhUAwfJpRo+qi+/j1irH1QbUfwMosgQbBkKwiSx/OKOMhDbQuI7q5afHIVq/5tnJ/dkhzEGQyFji8+SxlhhWQsSo=
   file: 
-  - ./src/dissertation.pdf
+  - dissertation.pdf
   skip_cleanup: true
   on:
     branch: master
+    tags: true
