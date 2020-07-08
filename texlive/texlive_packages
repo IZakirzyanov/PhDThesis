@@ -13,4 +13,4 @@ collection-fontsrecommended
 luaotfload
 
 # texliveonfly does not detect the following packages automatically
-minted fvextra upquote lineno xstring framed caption nag memoir etoolbox pdflscape l3packages amscls amsfonts mathtools fontspec oberdiek babel-russian babel-german
+minted fvextra upquote lineno xstring framed caption nag memoir etoolbox pdflscape l3packages amscls amsfonts mathtools fontspec oberdiek babel-russian babel-german enumitem
