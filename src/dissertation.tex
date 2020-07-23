@@ -6,6 +6,9 @@
 \input{common/preamble-userdata}
 \input{common/preamble-markups}
 \input{common/preamble-post}
+% \OnehalfSpacing*
+% \setSpacing{1.42}
+\linespread{1.42}
 
 \begin{document}
 
@@ -21,25 +24,26 @@
 
 % Рефераты на русском и английском языках
 \thesynopsis{russian}{Р}{labauthor:zakirzyanov}{Synopsis/content-ru}
-% \thesynopsis{english}{S}{labauthor:zakirzyanov}{Synopsis/content-en}
+\thesynopsis{english}{S}{labauthor:zakirzyanov}{Synopsis/content-en}
 
 % Основной текст диссертации
 \setcounter{page}{\value{savedpage}}
 \resetfloatcounters
-\OnehalfSpacing
+
 % \include{Dissertation/introduction}    % Введение
- \include{Dissertation/review}           % Глава 1
+\include{Dissertation/review}
+\include{Dissertation/tight-encoding}
 % \include{Dissertation/conclusion}      % Заключение
 
-% \clearpage\urlstyle{rm}\printbibliography\urlstyle{tt}
+\clearpage\urlstyle{rm}\printbibliography\urlstyle{tt}
 % \clearpage\listoffigures
 % \clearpage\listoftables
-% \newpage
+\newpage
 
 %%% Настройки для приложений
 % \appendix
-\counterwithin{figure}{chapter}
-\counterwithin{table}{chapter}
+% \counterwithin{figure}{chapter}
+% \counterwithin{table}{chapter}
 %\counterwithin{algorithm}{chapter}
 %\counterwithin{lstlisting}{chapter}
 \renewcommand{\thechapter}{\Asbukx{chapter}}
@@ -47,7 +51,7 @@
 % \include{Dissertation/appendix}        % Приложения
 
 % \clearpage
-\chapter*{Публикации} \addcontentsline{toc}{chapter}{Публикации}
+% \chapter*{Публикации} \addcontentsline{toc}{chapter}{Публикации}
 % \includepdf[pages=-]{Papers/2015-LATA.pdf}
 % \includepdf[pages=-]{Papers/2017-DataMod.pdf}
 % \includepdf[pages=-]{Papers/2019-LATA.pdf}

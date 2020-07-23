@@ -371,10 +371,3 @@
 \DeclareCiteCommand{\filteredcite}{}{\ifkeyword{#1}{\global\togglefalse{footnotized@value}}{\global\toggletrue{footnotized@value}}}{}{}%
 \let\oldcite\cite\let\cite\trickycite}{\let\cite\oldcite\endgroup}
 \makeatother
-
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}
-\definecolor{darkred}{rgb}{0.7,0.1,0.1}
-\definecolor{middarkgrey}{rgb}{0.35,0.35,0.35}
-
-\newcommand{\inote}[1]{\medskip\noindent$[$\textcolor{darkred}{Илья}: \emph{\textcolor{middarkgrey}{#1}}$]$\medskip}
-\newcommand{\pto}{\mathrel{\ooalign{\hfil$\mapstochar$\hfil\cr$\to$\cr}}}
