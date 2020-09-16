@@ -61,13 +61,13 @@
 \newcommand{\labelsyn}[1]{\label{#1}}
 \newcommand{\thesynopsis}[4]{
 \begin{otherlanguage}{#1}
-\setcounter{page}{1}
+%\setcounter{page}{1}
 \begingroup
 \let\extref\ref%
-\renewcommand*{\thepage}{#2.\arabic{page}}
+% \renewcommand*{\thepage}{#2.\arabic{page}}
 \renewcommand*{\thefigure}{#2.\arabic{figure}}
 \renewcommand*{\thetable}{#2.\arabic{table}}
-\renewcommand*{\ref}[1]{\extref{syn:#2:##1}}%
+% \renewcommand*{\ref}[1]{\extref{syn:#2:##1}}%
 \renewcommand*{\labelsyn}[1]{\label{syn:#2:##1}}%
 \begin{footnotizeexcept}{#3}
 \begin{refsection}
