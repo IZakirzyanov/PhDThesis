@@ -5,7 +5,7 @@
 % Various definitions depending on how the bibliography is done
 
 \addbibresource{dissertation.bib}
-\DeclareSourcemap{
+\DeclareSourcemap{		
     \maps{
         \map{
             \step[fieldsource=medium, match=\regexp{Электронный\s+ресурс}, final]
@@ -16,7 +16,7 @@
 
 % Definitions and includes related for the text
 
-\DeclareRobustCommand{\todo}{\textcolor{black}}
+% \DeclareRobustCommand{\todo}{\textcolor{black}}
 \newcommand{\revise}[1]{\textcolor{red}{#1}}
 \graphicspath{{img/}}
 
@@ -50,7 +50,10 @@ yellow!90!black\\%12
 \definecolor{darkred}{rgb}{0.7,0.1,0.1}
 \definecolor{middarkgrey}{rgb}{0.35,0.35,0.35}
 
-\newcommand{\inote}[1]{\medskip\noindent$[$\textcolor{darkred}{Илья}: \emph{\textcolor{middarkgrey}{#1}}$]$\medskip}
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+% \newcommand{\inote}[1]{\medskip\noindent$[$\textcolor{darkred}{Илья}: \emph{\textcolor{middarkgrey}{#1}}$]$\medskip}
+\newcommand{\inote}[1]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,inline]{#1}}
+\newcommand{\needtodo}[1]{\todo[linecolor=Red,backgroundcolor=Red!25,bordercolor=Red,inline]{#1}}
 \newcommand{\pto}{\mathrel{\ooalign{\hfil$\mapstochar$\hfil\cr$\to$\cr}}}
 \newcommand{\chresults}[1]{\section*{Выводы по главе~#1}
 \addcontentsline{toc}{section}{Выводы по главе~#1}
