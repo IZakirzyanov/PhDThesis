@@ -49,11 +49,19 @@ yellow!90!black\\%12
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \definecolor{darkred}{rgb}{0.7,0.1,0.1}
 \definecolor{middarkgrey}{rgb}{0.35,0.35,0.35}
+\definecolor{darkblue}{rgb}{0.1,0.1,0.5}
 
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\usepackage[normalem]{ulem}
+\usetikzlibrary{shapes,arrows}
+
 % \newcommand{\inote}[1]{\medskip\noindent$[$\textcolor{darkred}{Илья}: \emph{\textcolor{middarkgrey}{#1}}$]$\medskip}
-\newcommand{\inote}[1]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,inline]{#1}}
-\newcommand{\needtodo}[1]{\todo[linecolor=Red,backgroundcolor=Red!25,bordercolor=Red,inline]{#1}}
+% \newcommand{\inote}[1]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,inline]{#1}}
+% \newcommand{\needtodo}[1]{\todo[linecolor=Red,backgroundcolor=Red!25,bordercolor=Red,inline]{#1}}
+
+\newcommand{\inote}[1]{}
+\newcommand{\needtodo}[1]{}
+
 \newcommand{\pto}{\mathrel{\ooalign{\hfil$\mapstochar$\hfil\cr$\to$\cr}}}
 \newcommand{\chresults}[1]{\section*{Выводы по главе~#1}
 \addcontentsline{toc}{section}{Выводы по главе~#1}

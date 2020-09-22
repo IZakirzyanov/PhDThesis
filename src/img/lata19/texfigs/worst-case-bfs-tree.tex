@@ -1,0 +1,111 @@
+%
+\begin{tikzpicture}[scale=0.75, level 1/.style={sibling distance=60mm},level 2/.style={sibling distance=40mm}, level distance=25mm, level 3/.style={sibling distance=50mm}]
+\node [ellipse,draw] (root){$1$}
+  child {node [ellipse,draw] (a0) {$2$}
+    child {node [ellipse,draw] (a0b0) {$L+2$}}
+    child {node [ellipse,draw] (a0bj) {$L+j+1$}}
+    child {node [ellipse,draw] (a0bL) {$2L+1$}}
+  }
+  child {node (aj) {$\vdots$}
+    child {node [ellipse,draw] (r) {$r$}
+      child {node [xshift=-0.25em,ellipse,draw] (r0) {$(r-1)L+2$}}
+      child {node [ellipse,draw] (rj) {$(r-1)L+j+1$}}
+      child {node [xshift=0.25em,ellipse,draw] (rL) {$rL+1$}}
+    }
+  }
+  child {node [ellipse,draw] (aL) {$L+1$}
+    child {node [ellipse,draw] (aLb0) {$L^2+2$}}
+    child {node [ellipse,draw] (aLbj) {$L^2+j+1$}}
+    child {node [ellipse,draw] (aLbL) {$L^2+L+1$}}
+  }
+;
+
+\path (root) -- (a0) node [below, midway, darkblue] {$1$};
+\path (root) -- (aL) node [below, midway, darkblue] {$L$};
+
+\path (a0) -- (a0b0) node [below, midway, darkblue] {$1$};
+\path (a0) -- (a0bj) node [left, midway, darkblue] {$j$};
+\path (a0) -- (a0bL) node [below, midway, darkblue] {$L$};
+
+\path (aL) -- (aLb0) node [below, midway, darkblue] {$1$};
+\path (aL) -- (aLbj) node [left, midway, darkblue] {$j$};
+\path (aL) -- (aLbL) node [below, midway, darkblue] {$L$};
+
+\path (r) -- (r0) node [below, midway, darkblue] {$1$};
+\path (r) -- (rj) node [left, midway, darkblue] {$j$};
+\path (r) -- (rL) node [below, midway, darkblue] {$L$};
+
+\path (a0) -- (aj) node [midway] {$..$};
+\path (aj) -- (aL) node [midway] {$..$};
+
+\path (a0b0) -- (a0bj) node [midway] {$..$};
+\path (a0bj) -- (a0bL) node [midway] {$..$};
+
+\path (aLb0) -- (aLbj) node [midway] {$..$};
+\path (aLbj) -- (aLbL) node [midway] {$..$};
+
+\path (r0) -- (rj) node [midway] {$..$};
+\path (rj) -- (rL) node [midway] {$..$};
+\end{tikzpicture}
+%
+%
+\begin{comment}
+%
+%
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=0.75, level 1/.style={sibling distance=60mm},level 2/.style={sibling distance=40mm}, level distance=25mm, level 3/.style={sibling distance=50mm}]
+\node [ellipse,draw] (root){$1$}
+  child {node [ellipse,draw] (a0) {$2$}
+   child {node [ellipse,draw] (a0b0) {$L+2$}}
+   child {node [ellipse,draw] (a0bj) {$L+j+2$}}
+   child {node [ellipse,draw] (a0bL) {$2L+1$}}
+  }
+  child {node (aj) {$\vdots$}
+    child {node [ellipse,draw] (r) {$r$}
+      child {node [ellipse,draw] (r0) {$(r-1)L+2$}}
+      child {node [ellipse,draw] (rj) {$(r-1)L+j+2$}}
+      child {node [ellipse,draw] (rL) {$rL+1$}
+        child [grow=right,red] {node [red] (j) {$0\leq j < L$} edge from parent[draw=none]}
+      }
+    }
+  }
+  child {node [ellipse,draw] (aL) {$L+1$}
+    child {node [ellipse,draw] (aLb0) {$L^2+2$}}
+    child {node [ellipse,draw] (aLbj) {$L^2+j+2$}}
+    child {node [ellipse,draw] (aLbL) {$L^2+L+1$}}
+  }
+;
+
+\path (root) -- (a0) node [midway, red] {$0$};
+\path (root) -- (aL) node [midway, red] {$L-1$};
+
+\path (a0) -- (a0b0) node [midway, red] {$0$};
+\path (a0) -- (a0bj) node [midway, red] {$j$};
+\path (a0) -- (a0bL) node [midway, red] {$L-1$};
+
+\path (aL) -- (aLb0) node [midway, red] {$0$};
+\path (aL) -- (aLbj) node [midway, red] {$j$};
+\path (aL) -- (aLbL) node [midway, red] {$L-1$};
+
+\path (r) -- (r0) node [midway, red] {$0$};
+\path (r) -- (rj) node [midway, red] {$j$};
+\path (r) -- (rL) node [midway, red] {$L-1$};
+
+\path (a0) -- (aj) node [midway] {$..$};
+\path (aj) -- (aL) node [midway] {$..$};
+
+\path (a0b0) -- (a0bj) node [midway] {$..$};
+\path (a0bj) -- (a0bL) node [midway] {$..$};
+
+\path (aLb0) -- (aLbj) node [midway] {$..$};
+\path (aLbj) -- (aLbL) node [midway] {$..$};
+
+\path (r0) -- (rj) node [midway] {$..$};
+\path (rj) -- (rL) node [midway] {$..$};
+\end{tikzpicture}
+\caption{Worst case BFS tree with $0\leq j <L$}
+\end{figure}
+%
+%
+\end{comment}

@@ -1,0 +1,22 @@
+digraph APTA {
+    graph [dpi = "300"];
+    splines="line";
+    node [shape = circle, fixedsize = true, width = "0.4", fontsize = 16];
+    edge [arrowsize = "0.7"];
+    rankdir=LR;
+
+    {node [style = filled, shape = doublecircle, fillcolor = black, fontcolor = white]; 5}
+    {node [shape = doublecircle]; 6; 3; 7; 9}
+
+    1 -> 2 [label = < <i>a</i>>];
+    2 -> 3 [label = < <i>b</i>>];
+    3 -> 4 [label = < <i>b</i>>];
+    4 -> 5 [label = < <i>b</i>>];
+    
+    1 -> 6 [label = < <i>b</i>>];
+    6 -> 7 [label = < <i>a</i>>];
+
+    6 -> 8 [label = < <i>b</i>>];
+    8 -> 9 [label = < <i>b</i>>];
+}
+

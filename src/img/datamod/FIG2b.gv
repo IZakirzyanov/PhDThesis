@@ -1,0 +1,31 @@
+digraph APTA {
+    graph [dpi = "300", nodesep = "0.2"];
+    //node [shape = circle, fixedsize = true, width = "0.4"];
+    node [shape = circle, fontsize = 28, fixedsize = true, width = "0.7"];
+    edge [dir=none, weight="10"];
+    
+    layout=circo;
+    
+    {node [style = filled, shape = doublecircle, fillcolor = black, fontcolor = white]; 5; 8}
+    {node [shape = doublecircle]; 4; 6; 7}
+
+    1 -> 2;
+    1 -> 5;
+
+    3 -> 5;
+    
+    4 -> 5;
+    4 -> 8;
+
+    5 -> 6;
+    5 -> 7;
+
+    6 -> 8;
+
+    7 -> 8;
+    
+    3 -> 4 [style=invis];
+    2 -> 3 [style=invis];
+    1 -> 6 [style=invis];
+}
+

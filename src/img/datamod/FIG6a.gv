@@ -1,0 +1,30 @@
+digraph BFS {
+    graph [dpi = "300", ranksep=0.45];
+    node [shape = circle, fixedsize = true, width = "0.4", fontsize = 16];
+    edge [arrowsize = "0.7"];
+    rankdir=LR;
+
+    {rank = 0; 1;}
+    {rank = same; 2 -> 3 [style=invis]; 4;}
+    {rank = same; 5; 6;}
+
+    "" [shape = none, width = "0.1"];
+    1 [shape = doublecircle];
+    3 [shape = doublecircle];
+    6 [shape = doublecircle];
+
+    "" -> 1;
+    1 -> 2 [label = <<i>a</i>>, style = bold];
+    1 -> 4 [label = <<i>c</i>>, style = bold];
+    1 -> 3 [label = <<i>b</i>>, style = bold];
+    2 -> 4 [label = <<i>a</i>>];
+    2 -> 5 [label = <<i>b</i>>, style = bold];
+    2 -> 1 [label = <<i>c</i>>];
+    3 -> 1 [label = <<i>a</i>>, constraint = false];
+    3 -> 3 [label = <<i>b</i>,<i>c</i>>];
+    4 -> 2 [label = <<i>a</i>>];
+    4 -> 6 [label = <<i>b</i>, <i>c</i>>, style = bold];
+    5 -> 2 [label = <<i>b</i>>, constraint = false];
+    5 -> 5 [label = <<i>a</i>,<i>c</i>>];
+    6 -> 6 [label = <<i>a</i>,<i>b</i>,<i>c</i>>];
+}

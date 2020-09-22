@@ -1,0 +1,29 @@
+%------------------------------------------------------------------------------%
+% File:        dfa1.tex
+%
+% Description:
+%
+% Created:     19 Nov 2016.
+%
+% Author:      Joao Marques-Silva (jpms).
+%------------------------------------------------------------------------------%
+
+\begin{tikzpicture}
+[shorten >=0.5pt,node distance=3cm,on grid,>=stealth',initial text=,
+lines/.style={line width=0.5pt,color=black},
+every state/.style={draw=black,thin},
+initial/.style=initial by arrow,thin,color=black,
+accepting/.style=accepting by double,text=black]
+
+\node[state,initial] (u_1) {$u_1$};
+\node[state] (u_2) [right=3cm of u_1] {$u_2$};
+\node[state,accepting] (u_3) [right=3cm of u_2] {$u_3$};
+
+\path[->,line width=0.5pt,color=black]
+          (u_1) edge [loop below]   node [below]  {0} (u_0)
+                edge [bend left=30] node [below]  {1} (u_2)
+          (u_2) edge [bend left=30] node [above]  {0} (u_1)
+                edge                node [above]  {1} (u_3)
+          (u_3) edge [loop below]   node [below]  {1} (u_3)
+                edge [bend left=30] node [below]  {0} (u_1);
+\end{tikzpicture}

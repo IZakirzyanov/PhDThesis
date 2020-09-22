@@ -1,0 +1,27 @@
+digraph DFStree {
+    graph [dpi = "300", ranksep=0.35];
+    node [shape = circle, fixedsize = true, width = "0.35", fontsize = 12];
+    edge [arrowsize = "0.6"];
+
+    {rank = 0; 1;}
+    {rank = same; 2; 8;}
+    {rank = same; 3; 5;}
+    {rank = same; 4; 6; 7;}
+    
+    "" [shape = none, width = "0.1", height = "0.1"];
+    1 [shape = doublecircle];
+    3 [shape = doublecircle];
+    4 [shape = doublecircle];
+    7 [shape = doublecircle];
+
+
+    "" -> 1;
+    1 -> 2 [label = <<i>a</i>>];
+    1 -> 8 [label = <<i> b</i>>];
+    2 -> 3 [label = <<i>a</i>>];
+    2 -> 5 [label = <<i>c</i>>];
+    3 -> 4 [label = <<i> b</i>>];
+    5 -> 6 [label = <<i> b</i>>];
+    5 -> 7 [label = <<i>c</i>>];
+
+}

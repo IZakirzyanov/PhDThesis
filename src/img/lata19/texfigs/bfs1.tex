@@ -1,0 +1,29 @@
+%------------------------------------------------------------------------------%
+% File:        bfs1.tex
+%
+% Description: 
+%
+% Created:     03 Jan 2017.
+%
+% Author:      Joao Marques-Silva (jpms).
+%------------------------------------------------------------------------------%
+%
+\begin{tikzpicture}
+[shorten >=0.5pt,node distance=2.5cm,on grid,>=stealth',initial text=,
+lines/.style={line width=0.5pt,color=black},
+every state/.style={draw=black,thin},
+initial/.style=initial by arrow,thin,color=black,
+accepting/.style=accepting by double,text=black]
+
+\node[state,initial] (u_1) {$1$};
+\node[state] (u_2) [above right=of u_1] {$2$};
+\node[state] (u_3) [below right=of u_2] {$3$};
+
+\path[->,line width=0.5pt,color=black]
+          (u_1) edge node [below] {~} (u_2)
+          (u_2) edge node [above] {~} (u_3)
+          (u_3)
+                ;
+\end{tikzpicture}
+%
+%------------------------------------------------------------------------------%

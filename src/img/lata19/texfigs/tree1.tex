@@ -1,0 +1,67 @@
+%------------------------------------------------------------------------------%
+% File:        tree1.tex
+%
+% Description: 
+%
+% Created:     19 Nov 2016.
+%
+% Author:      Joao Marques-Silva (jpms).
+%------------------------------------------------------------------------------%
+%
+\begin{tikzpicture}[
+    every node/.style={draw=black,circle},
+    lines/.style={line width=1.0pt,color=black},
+    level/.style={sibling distance=80mm/#1},
+    noedge/.style={
+     edge from parent/.append style={draw=none}
+   }
+  ]
+  \node (t01) {$t_{01}$}
+  child { node (t02) {$t_{02}$}
+    child { node (t04) {$t_{04}$}
+      child { node (t08) {$t_{08}$}
+        %% Hack to force space below tree...
+        child { [noedge] node [draw=none] (t00) {} }
+        edge from parent node[left,draw=none,fill=none] {0}
+      }
+      child { node (t09) {$t_{09}$} edge from parent node[right,draw=none,fill=none] {1}
+      }
+      edge from parent node[left,draw=none,fill=none] {0}
+    }
+    child { node (t05) {$t_{05}$}
+      child { node (t10) {$t_{10}$} edge from parent node[left,draw=none,fill=none] {0}
+      }
+      child { node[accepting] (t11) {$t_{11}$} edge from parent node[right,draw=none,fill=none] {1}
+      }
+      edge from parent node[right,draw=none,fill=none] {1}
+    }
+    edge from parent node[left=10pt,draw=none,fill=none] {0}
+  }
+  %
+  child { node (t03) {$t_{03}$}
+    child { node (t06) {$t_{06}$}
+      child { node (t12) {$t_{12}$} edge from parent node[left,draw=none,fill=none] {0}
+      }
+      child { node (t13) {$t_{13}$} edge from parent node[right,draw=none,fill=none] {1}
+      }
+      edge from parent node[left,draw=none,fill=none] {0}
+    }
+    child { node[accepting] (t07) {$t_{07}$}
+      child { node (t14) {$t_{14}$} edge from parent node[left,draw=none,fill=none] {0}
+      }
+      child { node[accepting] (t15) {$t_{15}$}
+        %% Hack to force space below tree...
+        child { [noedge] node [draw=none] (t00) {} }
+        edge from parent node[right,draw=none,fill=none] {1}
+      }
+      edge from parent node[right,draw=none,fill=none] {1}
+    }
+    edge from parent node[right=10pt,draw=none,fill=none] {1}
+  };
+\end{tikzpicture}
+
+\vspace*{1.5cm} \quad
+
+\vspace*{1.5cm} \quad
+%
+%------------------------------------------------------------------------------%
