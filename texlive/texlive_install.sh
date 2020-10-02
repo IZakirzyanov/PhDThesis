@@ -18,7 +18,10 @@ if ! command -v texlua > /dev/null; then
   ./install-tl --profile=../texlive/texlive.profile
 
   cd ..
+  echo 'installed'
 fi
+
+tlmgr update --self
 
 # Just including texlua so the cache check above works
 tlmgr install luatex
