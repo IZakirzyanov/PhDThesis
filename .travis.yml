@@ -6,10 +6,10 @@ before_install:
 - fc-cache -f -v
 install:
 - source ./texlive/texlive_install.sh
-# cache:
-#   directories:
-#   - "/tmp/texlive"
-#   - "$HOME/.texlive"
+cache:
+  directories:
+  - "/tmp/texlive"
+  - "$HOME/.texlive"
 before_script: cd $TRAVIS_BUILD_DIR/src/
 script:
 - make dissertation

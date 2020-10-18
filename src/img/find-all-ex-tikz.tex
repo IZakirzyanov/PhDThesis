@@ -1,0 +1,129 @@
+\begin{tikzpicture}[
+    ->, % makes the edges directed
+    >=stealth', % makes the arrow heads bold
+    node distance=1.9cm, % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10, minimum size = 0pt}, % sets the properties for each ’state’ node
+    initial text=$ $, % sets the text that appears on the start arrow
+    ]
+  \node (a1) 
+    {
+      \begin{tikzpicture}
+        \node[state, initial]     (q11)                 {$1$};
+        \node[state, accepting]   (q12) [right of=q11]  {$2$};
+        \node[state]              (q13) [below of=q11]  {$3$};
+
+        \path     (q11) edge  [above]       node {a,b}  (q12)
+                  (q12) edge  [below right] node {a}    (q13)
+                        edge  [loop above]  node {b}    (q12)
+                  (q13) edge  [left]        node {a,b}  (q11)
+                        ;
+      \end{tikzpicture}
+    };
+  \node[right=0.1cm of a1] (a2)
+    {
+      \begin{tikzpicture}
+        \node[state, initial, accepting]  (q21)                 {$1$};
+        \node[state, accepting]           (q22) [right of=q21]  {$2$};
+        \node[state]                      (q23) [below of=q21]  {$3$};
+
+        \path     (q21) edge  [above]                 node {a,b}  (q22)
+                  (q22) edge  [below right]           node {a}    (q23)
+                        edge  [bend right=45, above]  node {b}    (q21)
+                  (q23) edge  [left]                  node {a}    (q21)
+                        edge  [loop below]            node {b}    (q23)
+                        ;
+      \end{tikzpicture}
+    };
+  \node[right=0.1cm of a2] (a3)
+    {
+      \begin{tikzpicture}
+        \node[state, initial, accepting]  (q31)                 {$1$};
+        \node[state, accepting]           (q32) [right of=q31]  {$2$};
+        \node[state]                      (q33) [below of=q31]  {$3$};
+
+        \path     (q31) edge  [above]                 node {a,b}  (q32)
+                  (q32) edge  [below right]           node {a}    (q33)
+                        edge  [loop above]            node {b}    (q32)
+                  (q33) edge  [left]                  node {a}    (q31)
+                        edge  [loop below]            node {b}    (q33)
+                        ;
+      \end{tikzpicture}
+    };
+  \node[below=0.1cm of a1] (a4)
+    {
+      \begin{tikzpicture}
+        \node[state, initial, accepting]  (q41)                 {$1$};
+        \node[state, accepting]           (q42) [right of=q41]  {$2$};
+        \node[state]                      (q43) [below of=q41]  {$3$};
+
+        \path     (q41) edge  [above]                 node {a}    (q42)
+                        edge  [loop above]            node {b}    (q41)
+                  (q42) edge  [below right]           node {a,b}  (q43)
+                  (q43) edge  [left]                  node {a}    (q41)
+                        edge  [loop below]            node {b}    (q43)
+                        ;
+      \end{tikzpicture}
+    };
+  \node[right=0.1cm of a4] (a5)
+    {
+      \begin{tikzpicture}
+        \node[state, initial, accepting]  (q51)                 {$1$};
+        \node[state, accepting]           (q52) [right of=q51]  {$2$};
+        \node[state]                      (q53) [below of=q51]  {$3$};
+
+        \path     (q51) edge  [above]                       node {a}    (q52)
+                        edge  [bend right=10, left]         node {b}    (q53)
+                  (q52) edge  [bend right=10, above left]   node {a}    (q53)
+                        edge  [loop above]                  node {b}    (q52)
+                  (q53) edge  [bend right=10, right]        node {a}    (q51)
+                        edge  [bend right=10, below right]  node {b}    (q52)
+                        ;
+      \end{tikzpicture}
+    };
+  \node[right=0.1cm of a5] (a6)
+    {
+      \begin{tikzpicture}
+        \node[state, initial]             (q61)                 {$1$};
+        \node[state, accepting]           (q62) [right of=q61]  {$2$};
+        \node[state]                      (q63) [below of=q61]  {$3$};
+
+        \path     (q61) edge  [above]                       node {a}    (q62)
+                        edge  [bend right=10, left]         node {b}    (q63)
+                  (q62) edge  [bend right=10, above left]   node {a}    (q63)
+                        edge  [loop above]                  node {b}    (q62)
+                  (q63) edge  [bend right=10, right]        node {a}    (q61)
+                        edge  [bend right=10, below right]  node {b}    (q62)
+                        ;
+      \end{tikzpicture}
+    };
+  \node[below=0.1cm of a4, xshift=1.8cm] (a7)
+    {
+      \begin{tikzpicture}
+        \node[state, initial]             (q71)                 {$1$};
+        \node[state, accepting]           (q72) [right of=q71]  {$2$};
+        \node[state]                      (q73) [below of=q71]  {$3$};
+
+        \path     (q71) edge  [above]                 node {a,b}  (q72)
+                  (q72) edge  [below right]           node {a}    (q73)
+                        edge  [loop above]            node {b}    (q72)
+                  (q73) edge  [left]                  node {a}    (q71)
+                        edge  [loop below]            node {b}    (q73)
+                        ;
+      \end{tikzpicture}
+    };
+  \node[right=0.1cm of a7] (a8)
+    {
+      \begin{tikzpicture}
+        \node[state, initial, accepting]  (q81)                 {$1$};
+        \node[state, accepting]           (q82) [right of=q81]  {$2$};
+        \node[state]                      (q83) [below of=q81]  {$3$};
+
+        \path     (q81) edge  [above]                       node {a}    (q82)
+                        edge  [bend right=10, left]         node {b}    (q83)
+                  (q82) edge  [below right]                 node {a}    (q83)
+                        edge  [loop above]                  node {b}    (q82)
+                  (q83) edge  [bend right=10, right]        node {a,b}  (q81)
+                        ;
+      \end{tikzpicture}
+    };
+\end{tikzpicture}
