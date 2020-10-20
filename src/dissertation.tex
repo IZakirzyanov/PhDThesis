@@ -14,13 +14,14 @@
 
 % Обрезка титульников
 \begin{otherlanguage}{russian}\thetitlepage\end{otherlanguage}
-\begin{otherlanguage}{english}\thetitlepage\end{otherlanguage}
-
+% \begin{otherlanguage}{english}\thetitlepage\end{otherlanguage}
 %Оглавление
-\ifoddpage\null\else\newpage\thispagestyle{empty}\null\newpage\fi
+% \ifoddpage\null\else\newpage\thispagestyle{empty}\null\newpage\fi
+% \newcounter{savedpage}
+% \addtocounter{savedpage}{5}
+\setcounter{page}{5}
+
 \clearpage\tableofcontents*\newpage
-\newcounter{savedpage}
-\addtocounter{savedpage}{\value{page}}
 
 % Рефераты на русском и английском языках
 \thesynopsis{russian}{Р}{labauthor:zakirzyanov}{Synopsis/content-ru}
@@ -54,9 +55,10 @@
 
 \clearpage
 \chapter*{Публикации} \addcontentsline{toc}{chapter}{Публикации}
-\includepdf[pages=-]{Papers/2015-LATA.pdf}
-\includepdf[pages=-]{Papers/2017-DataMod.pdf}
-\includepdf[pages=-]{Papers/2019-LATA.pdf}
-\includepdf[pages=-]{Papers/2020-Vestnik.pdf}
+\includepdf[pages=-,pagecommand={}]{Papers/2015-LATA.pdf}
+\includepdf[pages=-,pagecommand={}]{Papers/2017-DataMod.pdf}
+\includepdf[pages=-,pagecommand={}]{Papers/2018-Indin.pdf}
+\includepdf[pages=-,pagecommand={}]{Papers/2019-LATA.pdf}
+\includepdf[pages=-,pagecommand={}]{Papers/2020-Vestnik.pdf}
 
 \end{document}
