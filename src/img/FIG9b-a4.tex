@@ -1,0 +1,21 @@
+\begin{tikzpicture}[
+    ->, % makes the edges directed
+    >=stealth', % makes the arrow heads bold
+    node distance=2.5cm, % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10, minimum size = 0pt}, % sets the properties for each ’state’ node
+    initial text=$ $, % sets the text that appears on the start arrow
+    double distance between line centers=2pt
+]
+    \node[state, initial, accepting] (q1) {$1$};
+    \node[state, accepting] (q3) [above of=q1, xshift=2.5cm/2, yshift=-0.4cm] {$3$};
+    \node[state] (q2) [right of=q1] {$2$};
+
+    \path
+        (q1) edge [bend right=10, below] node {a} (q2)
+        (q2) edge [bend right=10, above] node {b} (q1)
+        (q1) edge [left] node {b} (q3)
+        (q3) edge [above] node [xshift=2pt] {b} (q2)
+        (q2) edge [loop above, dashed] node {a} (q2)
+        (q3) edge [loop above] node {a} (q3)
+        ;
+\end{tikzpicture}

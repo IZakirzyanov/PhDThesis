@@ -1,1 +1,59 @@
 %!TEX root = ../dissertation.tex
+
+\begin{enumerate}
+  \item Symmetry breaking predicates based on SAT encodings of the breadth-first search and depth-first search algorithms for reducing the search space reduction during SAT solving, and exact methods for DFA inference from behavior examples 
+  that use these predicates, have been developed.
+  The symmetry breaking predicates based on the encoding of the depth-first search algorithm have a rather theoretical
+  significance, since they have not demonstrated any advantage over predicates based on the breadth-first search 
+  algorithm encoding.
+  The encoding of the symmetry breaking predicates based on breadth-first search is expressed with an asymptotically 
+  smaller number of clauses in comparison to the previously proposed encoding.
+  The developed exact method that uses these predicates together with predicates based on characteristics of the BFS traversal tree demonstrates better performance in comparison to previous methods.
+
+  \item A new exact method for DFA inference from an excessive set of behavior examples that uses a reduction to SAT and counterexample-guided abstraction refinement has been developed.
+  The size of the Boolean formula and the number of used variables linearly increase with the growth of the number of 
+  behavior examples.
+  The developed method allows inferring a DFA from an excessive set of behavior examples by iteratively augmenting
+  the set of used behavior examples, completing the augmented prefix tree and using the SAT solver in incremental mode. 
+  Since the set of used behavior examples is augmented with counterexamples to inferred intermediate DFA, as a result only 
+  meaningful behavior examples are used for inference.
+  Thus, this method allows for an exact solution of problems which previously could not be solved due to a large size of the Boolean formula.
+  
+  \item A method for inferring all non-isomorphic DFA of minimal size satisfying given behavior examples has been developed that uses symmetry breaking predicates and SAT solvers.
+  Previously, the problem of inferring all minimal non-isomorphic DFA did not have an efficient solution, since
+  isomorphic automata, being equivalent in structure and defined language, are deemed to be distinct by a SAT solver, leading to considering $\mathcal{O}\left(M!\right)$ isomorphic automata with $M$ states.
+  The use of symmetry breaking predicates based on an encoding of the breadth-first search algorithm allows the SAT solver to consider only one representative of each isomorphism equivalence class instead of a factorial number of automata.
+  Thus, a method for solving the problem of inferring all minimal-sized non-isomorphic DFA has been first proposed.
+  The search for all non-isomorphic automata may be useful for their further analysis, and also for analysis of existing behavior examples.
+  Another application of the developed method is the possibility to prove the uniqueness of the minimal automaton that 
+  satisfies given behavior examples.
+  
+  \item During thesis preparation an open source software tool \texttt{DFA-Inductor-py} has been developed in \emph{Python} for the purpose of DFA inference from given behavior examples.
+  The software tool is comprised of different modules for solving the problem of DFA inference from given behavior examples, the problem of inferring a DFA from an excessive set of behavior examples, and the problem of inferring all non-isomorphic DFA from given behavior examples.
+  The tool implements different symmetry breaking predicates, including the ones developed by other authors and the ones developed in this thesis.
+
+  \item The results of this thesis were used in the educational process of the Faculty of Information Technologies and Programming in the course ``Design of automata-based programs'' of the Bachelors's program ``Mathematical models and algorithms in software engineering'' (supported by the official act of use).
+
+  \item A part of results have been used in the project SAUNA (``Integrated safety assessment and justification of nuclear power plant automaton'') by the ``IT in Industrial Automation'' research group of the department of electrical engineering and automation in Aalto University, Finland, in the framework of the Finnish research program in safety of nuclear power plants SAFIR2018.  This is confirmed by a letter from the principal investigator of the “IT in Industrial Automation” group, Valeriy Vyatkin.
+
+  \item Results of this thesis have also been used in the project No.~18-37-00425 ``Development of efficient machine learning methods for deterministic finite automata inference based on Boolean satisfiability solving'' (2018--2020) funded by the Russian Foundation for Basic Research and led by the author of the thesis, and in research projects in the framework of the Russian academic excellence project <<5-100>>.
+\end{enumerate}
+
+
+The exact method for DFA inference from given behavior examples that uses symmetry breaking predicates based on 
+the breadth-first first algorithm demonstrates better performance the previously known methods and allows inferring
+larger automata in less time.
+The method for inferring a DFA from an excessive set of behavior examples allows inferring automata from data, for which
+the previously known methods could not infer any DFA in principle due to a large size of the Boolean formula.
+The method for inferring all minimal-sized non-isomorphic DFA satisfying given behavior examples is the first known
+method that allows inferring all non-isomorphic DFA: previously known methods may adapted to finding all DFA, 
+but their application leads to a combinatorial explosion of the size of considered DFA due to lack of efficient 
+symmetry breaking predicates.
+The aim of this thesis was to increase the efficiency of exact methods for DFA inference from given behavior examples by reducing the search space during Boolean satisfiability problem solving.
+Thus, according to experimental results, the aim is achieved.
+
+
+\paragraph*{Acknowledgement.}
+The author expresses gratitude to his supervisor, V.~Ulyantsev, Ph.D., for invaluable assistance in research and in preparation of this thesis, Prof.~A.~Shalyto for mentoring, colleagues from the International Laboratory ``Computer Technologies'', D.~Chivilikhin, Ph.D., for numerous consultations on research and for help with the English translation of the synopsis, K.~Chukharev and D.~Suvorov for help in preparing illustrative material for this thesis, A.~Bugrovsky and T.~Galimzhanov for their help with documents for preparing the defense of this thesis, and to foreign colleagues A.~Ignatiev, Ph.D., and Prof.~J.~Marques-Silva, Dr.~habil., for organizing and active participation in the internship, within the framework of which part of the author's research was carried out.
+
+The author is also grateful to his parents, Timur and Valentina, for the fostered love of knowledge and mathematics, to Lazareva Ekaterina for always being there, to his friends Alexander B., Alexander S., Anastasia, Valentin, Eugene, Marina, Matvey, Natalya, Talgat and Tatiana for the moral support provided.

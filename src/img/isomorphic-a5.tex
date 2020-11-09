@@ -1,0 +1,32 @@
+\begin{tikzpicture}[
+    ->, % makes the edges directed
+    >=stealth', % makes the arrow heads bold
+    node distance=1.9cm, % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10, minimum size = 0pt}, % sets the properties for each ’state’ node
+    initial text=$ $, % sets the text that appears on the start arrow
+]
+  \node (a1) 
+    {
+      \begin{tikzpicture}
+        \node[state, initial] (q1) {$1$};
+        \node[state, accepting] (q2) [right of=q1] {$2$};
+        \node[state] (q3) [below of=q1, xshift=1.9cm/2, yshift=0.3cm] {$3$};
+
+        \path (q1) edge [above] node {a,b} (q2)
+              (q2) edge [right] node {a} (q3)
+                   edge [loop above] node {b} (q2)
+              (q3) edge [left] node {a,b} (q1);
+      \end{tikzpicture}
+    };
+  \node[right of=a1] (a2)
+    {
+      \node[state, initial] (q1) {$1$};
+      \node[state, accepting] (q2) [right of=q1] {$3$};
+      \node[state] (q3) [below of=q1, xshift=1.9cm/2, yshift=0.3cm] {$2$};
+
+      \path (q1) edge [above] node {a,b} (q2)
+            (q2) edge [right] node {a} (q3)
+                 edge [loop above] node {b} (q2)
+            (q3) edge [left] node {a,b} (q1);
+    };
+\end{tikzpicture}

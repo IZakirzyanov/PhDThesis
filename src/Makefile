@@ -7,4 +7,4 @@ dissertation:
 
 clean:
 	latexmk -C
-	rm -f {.,common,Dissertation,Synopsis}/*.{aux,dep,log,pdf,lof,lot,fls,out,toc,dvi,bbl,bcf,blg,run.xml,nav,snm,vrb,dpth,md5,auxlock,bak,sav}
+	rm -f {.,common,Dissertation,Synopsis,img}/*.{aux,dep,log,lof,lot,fls,out,toc,dvi,bbl,bcf,blg,run.xml,nav,snm,vrb,dpth,md5,auxlock,bak,sav,fdb_latexmk}

@@ -76,10 +76,14 @@ zakirzyanov-kmu15,
 zakirzyanov-kmu16,
 zakirzyanov-kmu17,
 zakirzyanov-kmu18,
-zakirzyanov-kmu20}}
+zakirzyanov-kmu20,
+program-2016,
+program-2018}}
 
 % Bibliography filters. As of now, they somewhat depend on which publications the author has.
 
+
+\defbibfilter{thesisAppendix}{\keyword{labauthor:zakirzyanov}\and\keyword{phd:zakirzyanov}\and\(\keyword{index:wos}\or\keyword{index:scopus}\or\keyword{index:vak}\)}
 \defbibfilter{thesisVak}{\keyword{labauthor:zakirzyanov}\and\keyword{phd:zakirzyanov}\and\keyword{index:vak}}
 \defbibfilter{thesisIndexed}{\keyword{labauthor:zakirzyanov}\and\keyword{phd:zakirzyanov}\and\not\keyword{index:vak}\and\(\keyword{index:wos}\or\keyword{index:scopus}\)}
 \defbibfilter{thesisEtc}{\keyword{labauthor:zakirzyanov}\and\keyword{phd:zakirzyanov}\and\not\keyword{index:vak}\and\not\keyword{index:wos}\and\not\keyword{index:scopus}\and\not\keyword{phd:program}}
@@ -100,6 +104,7 @@ zakirzyanov-kmu20}}
 \defbibheading{headingEtc}{\section*{\textRangeEtc}}
 \defbibheading{headingOtherIndexed}{\clearpage\chapter*{\textOtherPubs}\section*{\textRangeIndexed}}
 \defbibheading{headingProgram}{\section*{\textProgram}}
+\defbibheading{headingAppendix}{\clearpage\chapter{Публикации}}
 
 \newcommand{\printauthorpublications}{%
 \printbibliography[filter=thesisIndexed,heading=headingDissIndexed]%
@@ -111,3 +116,4 @@ zakirzyanov-kmu20}}
 \printbibliography[filter=thesisPrograms,heading=headingProgram]%
 }
 
+\newcommand{\printauthorpublicationsappendix}{\printbibliography[filter=thesisAppendix,heading=headingAppendix]}

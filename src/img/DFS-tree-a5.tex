@@ -1,0 +1,28 @@
+\begin{tikzpicture}[
+    ->, % makes the edges directed
+    >=stealth', % makes the arrow heads bold
+    node distance=1.5cm, % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10, minimum size = 0pt}, % sets the properties for each ’state’ node
+    initial text=$ $, % sets the text that appears on the start arrow
+]
+    \def\xshift{0.7cm}
+
+    \node[state, initial above, accepting]     (q1)                 {$1$};
+    \node[state] (q2) [below of=q1, xshift=-\xshift] {$2$};
+    \node[state] (q8) [below of=q1, xshift=\xshift] {$8$};
+    \node[state, accepting] (q3) [below of=q2, xshift=-\xshift] {$3$};
+    \node[state] (q5) [below of=q2, xshift=\xshift] {$5$};
+    \node[state, accepting] (q4) [below of=q3, xshift=-\xshift] {$4$};
+    \node[state] (q6) [below of=q5, xshift=-\xshift] {$6$};
+    \node[state, accepting] (q7) [below of=q5, xshift=\xshift] {$7$};
+
+    \path
+        (q1) edge [left] node {a} (q2)
+        (q1) edge [right] node {b} (q8)
+        (q2) edge [left] node {a} (q3)
+        (q2) edge [right] node {c} (q5)
+        (q3) edge [left] node {b} (q4)
+        (q5) edge [left] node {b} (q6)
+        (q5) edge [right] node {c} (q7)
+        ;
+\end{tikzpicture}

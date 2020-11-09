@@ -1,1 +1,219 @@
 %!TEX root = ../dissertation.tex
+
+\textbf{Relevance.}
+Finite-state machines are one of the fundamental concepts in discrete mathematics, informatics, and software engineering.
+Besides a direct role in the formal languages theory and design of computing devices, various finite-state machine models are practically used nowadays for
+development and analysis of software.
+
+For example, finite-state machines are used for development of software models for controllers and mission-critical systems\cite{shalyto-automata-2010-en,DBLP:conf/setta/PatilDV15},
+protocol specification~\cite{DBLP:conf/coordination/JongmansHA14}, behavior modeling for complex high-level systems~\cite{DBLP:journals/ese/HeuleV13,wagner2006modeling}.
+The main advantages of using finite-state machines include their relative simplicity for human perception and the possibility of automated formal verification of model properties~(model checking)~\cite{clarke2018model}.
+
+In many cases the finite-state model is created by a developer manually, an example is the automata-based programming paradigm~\cite{shalyto-automata-2010-en}.
+Other applications assume automated inference of a finite-state machine: extraction of the model from existing data or systems.
+Among practical examples of finite-state model inference applications are:
+synthesis of software models for controllers from manually or automatically collected behavior examples~\cite{DBLP:conf/etfa/ChivilikhinBUSS18}, 
+synthesis of formal models for plants in control systems~\cite{DBLP:conf/etfa/BuzhinskyV17,DBLP:journals/tii/BuzhinskyV17}, 
+analysis of interaction models for complex software systems~\cite{DBLP:journals/tosem/CookW98,DBLP:conf/sigsoft/BertolinoIPT09,DBLP:journals/ese/HeuleV13}  and network protocols~\cite{DBLP:conf/sp/SivakornAPKJ17}, etc.
+Active research and development in finite-state machine inference algorithms began in the 1970's.
+In 1978 Gold proved that the problem of inferring a deterministic finite automaton~(DFA) with the minimal number of states from given behavior examples is NP-complete~\cite{DBLP:journals/iandc/Gold78}.
+This theoretical result emphasizes the complexity of the finite-state machine inference problem in the general case, actualizing the development of practically applicable algorithms.
+
+Since then, a large variety of both heuristic and metaheuristic algorithms for finite-state machine inference from behavior examples have been proposed,
+now comprising a whole class of algorithms in discrete mathematics.
+In recent years a group of methods have been developed that are based on reductions of the problem of finding a minimal (in terms of the number of states) finite-state machine to other NP-complete problems.
+The most efficient approaches are based on reductions to the Boolean satisfiability problem.
+
+The Boolean satisfiability problem (SAT) consists of determining whether a satisfying assignment exists for a given Boolean formula.
+According to the Cook-Levin theorem from 1971, the Boolean satisfiability problem is NP-complete.
+This fact stimulated and actualized the development of practically applicable software tools for solving SAT.
+
+SAT solving methods have been developed even before any theoretical complexity bounds were introduced.
+In 1962 the Davis-Putnam-Logemann-Loveland~(DPLL)~\cite{DBLP:journals/cacm/DavisLL62} algorithm has been proposed for solving SAT: it is a complete algorithm with the capability of returning a 
+satisfying assignment for satisfiable formulas, which is based the unit propagation rule and elimination of clean variables for accelerating the search.
+This algorithm heuristically searches the space of all variable assignments and stops if a satisfying assignment has been found; if the algorithm completed the search and did not find a satisfying assignment, the formula is concluded to be unsatisfiable.
+
+In the 1990's the Conflict Driven Clause Learning~(CDCL)~\cite{DBLP:conf/iccad/SilvaS96} algorithm has been proposed based on the DPLL algorithm: CDCL saves clauses derived from analyzing conflicts 
+encountered in DPLL.
+Such clauses allow the algorithm to much earlier decide the unsatisfiability of the formula with current assumptions, and switch to considering new assumptions.
+
+The CDCL algorithm is the base of all modern software tools for solving SAT (SAT solvers).
+Unlike the situation for all other NP-hard problems, the research community annually holds SAT solver competitions~\cite{sat-competitions,sat-competition-2020}.
+This fact actualizes development of problem solving methods based on reductions to SAT:
+to increase the efficiency of the method one does not need to change its source code, it will be sufficient to simply change the SAT solver to a more modern one.
+
+However, in the methodology of reducing a given problem to SAT the fundamental question is not the used SAT solver, but the way an instance of the problem is translated to a Boolean formula,
+for which a satisfying assignment will be searched.
+For example, in recent years for the problem of inferring a minimal DFA from given behavior examples a basic reduction to SAT~\cite{heule-icgi10} and several of 
+its extensions~\cite{DBLP:journals/ese/HeuleV13,ulyantsev-phd-13-en} have been developed.
+The modifications proposed the use of symmetry-breaking predicates: auxiliary clauses that define a problem-dependent way of search space reduction.
+
+These search space reduction techniques proved to be very effective in practice, allowing inference of finite-state machines of larger size than it was possible before.
+However, consequent analysis shows that these techniques are not optimal, and the area of applicability of state-of-the-art methods for exact DFA synthesis from behavior examples is still quite limited
+(which is, first of all, explained by the NP-completeness of the problem).
+Thus, the topic of this thesis, which continues the described research of recent years and aims to extend the capabilities of methods for search space reduction and DFA inference, 
+is \textbf{relevant} to this research domain.
+
+\textbf{State of the art.}
+The problem of inferring a deterministic finite automaton from behavior examples given by two sets $S_{+}$ and $S_{-}$ consists in finding a DFA with the minimal number of states,
+such that all strings from the set $S_{+}$ are accepted by the automaton, and all strings from $S_{-}$ are rejected.
+This problem was first formulated in Gold's paper in 1967~\cite{DBLP:journals/iandc/Gold67}.
+
+The first known algorithm for solving this problem has been proposed in the work by Trakhtenbrot and Barzdin in 1970~\cite{trakhtenbrot-1973-modeling-en}: the \texttt{TB}-algorithm.
+However, this algorithm only covers one special case of the problem of DFA inference from behavior examples:
+sets $S_{+}$ and $S_{-}$ must contain all words of length $k$ over the alphabet $\Sigma$ (a total of $\abs{\Sigma}^{k}$ words).
+In this algorithm, as in the majority of the following ones, behavior examples are represented as an augmented prefix tree: a prefix tree, in which vertices can be accepting, rejecting, or intermediate.
+The \texttt{TB}-algorithm performs brute-force search of all possible pairs of states of the prefix tree, and merges equivalent states.
+
+In 1978 Gold proved that the problem of finding a DFA of a given size (and thus of minimal size too) is NP-complete~\cite{DBLP:journals/iandc/Gold78}.
+Due to this complexity result, development of new minimal DFA inference algorithm seized for a decade.
+In the following years researchers started developing inexact heuristic algorithms, which do not guarantee the minimality of the found DFA.
+Among these algorithms are: \texttt{traxbar}~\cite{DBLP:conf/colt/Lang92}, \texttt{RPNI}~\cite{oncina-rpni-1992}, \texttt{EDSM}~\cite{DBLP:conf/icgi/LangPP98}, \texttt{exbar}~\cite{lang-1999-faster}, \texttt{Windowed-EDSM}~\cite{DBLP:conf/icgi/CicchelloK02}.
+All mentioned algorithms are based on merging the states of the augmented prefix tree.
+The states for merging are selected heuristically: this explains the high efficiency of these algorithms and their inexactness.
+
+Another common approach to DFA inference from behavior examples is the application of metaheuristic algorithms.
+For example, evolutionary~\cite{DBLP:journals/pami/LucasR05,DBLP:conf/cec/Gomez06} and ant colony optimization~\cite{chivilikhin-12-ant} algorithms have been proposed.
+Metaheuristic algorithms are also inexact: they do not even guarantee that any solution will be found in finite time.
+
+Scientists from Netherlands Heule and Verwer proposed in 2010 an algorithm \texttt{DFASAT} that can infer a DFA of guaranteed minimal size from arbitrary behavior examples~\cite{heule-icgi10}.
+The algorithm is based on a reduction of the problem of DFA inference from behavior examples to SAT, where an arbitrary step is a reduction to graph coloring proposed in 1997~\cite{Coste97regularinference}.
+For reducing the size of the search space during SAT solving Heule and Verwer proposed a number of symmetry breaking approaches: consistency graph, auxiliary clauses, search for a large clique.
+However, even with all these techniques, in reasonable time \texttt{DFASAT} can infer automata with no more than ten states.
+In order to simplify the problem, Heule and Verwer proposed to use the \texttt{EDSM} algorithm to make several merges in the augmented prefix tree prior to using the SAT approach: however, this leads to the whole algorithm becoming inexact, and the DFA minimality guarantee is lost.
+
+Later, the author of the thesis together with his supervisor Vladimir Ulyantsev and professor Anatoly Shalyto proposed symmetry breaking predicates based on the breadth-first search algorithm
+(BFS)~\cite{zakirzyanov2015LATA}.
+For each DFA with $M$ states there exist $\mathcal{O}\left(M!\right)$ isomorphic automata, which are distinct from the point of view of a SAT solver.
+The proposed symmetry breaking predicates yield a considerable reduction of the search space during SAT solving: instead of a factorial of isomorphic automata, only one representative of each
+isomorphism equivalence class is considered during search.
+This one representative is a DFA with states enumerated in the order of BFS traversal.
+This method is the most efficient among known methods for exact DFA inference from behavior examples, and allows inference of automata with up to 40 states.
+However, analysis showed that the proposed na\"ive SAT encoding of BFS predicates is not optimal: the resulting Boolean formula is too large.
+Furthermore, symmetry breaking predicates based on depth-first search~(DFS) have not been considered.
+
+Among other drawbacks of SAT-based DFA inference methods an important one is the dependence of the size of the Boolean formula from the size of the behavior examples.
+Sets of behavior examples are often excessive and contain unnecessary words.
+Literature analysis showed that no intellectual methods of choosing a subset of behavior examples have been proposed earlier.
+A possible solution is the application of \emph{counterexample-guided abstraction refinement}~(CEGAR)~-- an iterative algorithm initially proposed for software model inference~\cite{DBLP:conf/cav/ClarkeGJLV00,мандрыкин2013введение-en}.
+
+The opposite situation is inference of a DFA from small sets of behavior examples.
+In this case it may be beneficial to infer all corresponding minimal non-isomorphic DFA for further analysis.
+Also, the existence of a single unique DFA of minimal size for a given set of training data illustrates the quality of the latter.
+However, the problem of inferring all non-isomorphic DFA has not been considered before by the research community, and thus no efficient methods have been proposed.
+
+The \textbf{aim} of this thesis is to increase the efficiency of exact methods for deterministic finite automata inference from given behavior examples by means of reducing the search space during Boolean satisfiability problem solving.
+In order to achieve this aim, the following \textbf{tasks} have been defined and completed:
+\begin{enumerate}
+  \item Development of symmetry breaking predicates based on SAT encodings of the breadth-first and depth-first graph search algorithms for reducing the search space during SAT solving.
+  Development and implementation of exact methods for DFA inference from behavior examples using said predicates, and experimental evaluation of developed methods.
+
+  \item Development and implementation of an exact method for DFA inference from an excessive set of behavior examples using a reduction to SAT and counterexample-guided abstraction refinement.
+  Experimental evaluation of the developed method.
+  
+  \item Development and implementation of a method for inferring all non-isomorphic DFA of minimal size from given behavior examples using symmetry breaking predicates and SAT solvers.
+  Experimental evaluation of the developed method.
+\end{enumerate}
+
+The \textbf{object of the study} is the problem of DFA inference from given behavior examples.
+
+The \textbf{subject of the study} are exact DFA inference methods that use Boolean satisfiability solvers.
+
+\textbf{Compliance with specialty requirements.} The thesis complies with \S 10 
+``Development of foundations of mathematical theory of formal languages and grammars, finite automata theory, and graph theory''.
+
+\textbf{Principal statements of the thesis:}
+\begin{enumerate}
+  \item An \emph{approach} for constructing symmetry breaking predicates based on SAT encodings of breadth-first and depth-first graph search algorithms for the purpose of reducing the search space during SAT solving.
+  Exact \emph{methods} for DFA inference from given behavior examples that use the said predicates.
+  
+  \item An exact \emph{method} for DFA inference from an excessive set of behavior examples using a reduction to SAT and counterexample-guided abstraction refinement.
+  
+  \item A \emph{method} for inferring all non-isomorphic DFA of minimal size from given behavior examples using symmetry breaking predicates and SAT solvers.
+\end{enumerate}
+
+The \textbf{scientific novelty} of the thesis is as follows:
+\begin{enumerate}
+  \item Symmetry breaking predicates based on a SAT encoding of the depth-first search algorithm have not been proposed before.
+  The proposed symmetry breaking predicates based on the breadth-first search algorithm are expressed with a Boolean formula that is comprised of an asymptotically smaller number of clauses in comparison to the existing approach. 
+  Moreover, new symmetry breaking predicates that utilize special features of the breath-first search tree are proposed.
+
+  \item Previously, no exact DFA inference methods for the case of an excessively large number of behavior examples have been proposed.
+  The use of counterexample-guided abstraction refinement together with a reduction to SAT allows for DFA inference from an excessive set of behavior examples through
+  iteratively adding only meaningful examples until a DFA satisfying the whole excessive set will be inferred.
+
+  \item No methods for inferring all non-isomoprhic DFA of minimal (or any fixed) size satisfying given behavior examples have been previously proposed.
+\end{enumerate}
+
+\textbf{Research methodology and methods.} 
+The methodological basis of the thesis is formed by the principles of formalization, generalization, deductive and inductive substantiation of statements, experimental evaluation and analysis of experimental results.
+This thesis uses methods of automata theory, graph theory, probability theory, discrete mathematics, object oriented programming, experiment design and analysis.
+
+\textbf{Soundness and correctness} of scientific results obtained in this thesis is confirmed by correct justification of problem settings, precise formulation of criteria,
+as well as by the results of experimental evaluation of the proposed methods.
+
+The \textbf{theoretical significance} of the thesis is that it proposes new methods for search space reduction during SAT solving for the problem of DFA inference, namely, symmetry breaking predicates based on SAT encodings of breadth-first and depth-first graph search algorithms:
+\begin{itemize}
+  \item a SAT encoding of the DFS-enumeration property of a DFA is proposed;
+  \item a new SAT encoding of the BFS-enumeration property of a DFA is proposed that requires an asymptotically smaller number of clauses than before;
+  \item a SAT encoding of various properties of the BFS traversal tree is proposed.
+\end{itemize}
+Furthermore, the thesis proposes an approach that combines a SAT-based DFA inference method with counterexample-guided abstraction refinement.
+Also, the developed symmetry breaking predicates enable the proposal of a method for the problem of inferring all non-isomorphic DFA of minimal size, which previously did not have efficient solving methods.
+
+The \textbf{practical significance} of the thesis lies in efficiency improvement of exact methods for DFA inference from given behavior examples.
+Experiments showed that the proposed method for DFA inference from given behavior examples using BFS-based symmetry breaking methods
+is the most efficient one among known exact methods and allows inferring automata of larger size than previously proposed methods.
+The developed exact method for DFA inference from an excessive set of behavior examples using a SAT encoding and CEGAR allows efficient inference of automata in 
+the case when the size of the behavior examples is too large, and the resulting Boolean formula is too large to process for modern SAT solvers.
+The developed method of inferring all non-isomorphic DFA of minimal size from given behavior examples using symmetry breaking predicates and SAT solvers is the first known
+method for inferring all non-isomorphic automata.
+It also allows one to estimate the completeness of the data represented by behavior examples by means of proving the existence or absence of a single minimal-sized DFA that describes the data.
+
+Moreover, all developed methods and approaches may later be adapted for application to inference of more complex finite-state models~\cite{ulyantsev-phd-13-en}.
+For example, the proposed method for inferring all non-isomorphic DFA has been adapted to synthesize state machines that model the behavior of programmable logic controllers~\cite{DBLP:journals/tii/ChivilikhinPCCV20}.
+
+The results of the thesis \textbf{were used} in the project SAUNA (``Integrated safety assessment and justification of nuclear power plant automaton'') by the ``IT in Industrial Automation'' research group of the department of electrical engineering and automation in Aalto University, Finland, in the framework of the Finnish research program in 
+safety of nuclear power plants SAFIR2018\footnote{http://safir2018.vtt.fi/}.
+In particular, one of the project tasks was to develop a model inference method for various control systems of nuclear power plants components from given behavior examples and linear temporal logic specification.
+This task was solved using counterexample-guided abstraction refinement in a similar way to the one proposed by the author of the thesis for DFA inference.
+This is confirmed by a letter from the principal investigator of the ``IT in Industrial Automation'' group, Valeriy Vyatkin.
+
+Results of this thesis have also been used in the project No.~18-37-00425 ``Development of efficient machine learning methods for deterministic finite automata inference
+based on Boolean satisfiability solving'' (2018--2020) funded by the Russian Foundation for Basic Research and led by the author of the thesis.
+
+Results have also been used in the framework of the governmental financial support of leading universities in Russia, grant 074-U01 (project ``Bioinformatics, machine learning, programming technologies, coding theory, proactive systems'', 2013--2017) and grant 08-08 (project ``Methods, models and technologies of artificial intelligence in 
+bioinformatics, social media, cyber-physical, biometric and speech systems'', 2018--2020).
+
+Results are also used in the ``Design of automata-based programs'' course of the ``Mathematical models and algorithms in software engineering'' Bachelor's program of the 
+Faculty of Information Technologies and Programming (supported by the official act of use).
+
+\textbf{Dissemination.}
+The main results of the thesis were presented at the following venues:
+\begin{enumerate}
+  \item 9\textsuperscript{th} International Conference on Language and Automata Theory and Applications (LATA 2015). 2015, Nice, France.
+  \item 6\textsuperscript{th} International Symposium ``From Data to Models and Back (DataMod)''. 2017, Trento, Italy.
+  \item 16\textsuperscript{th} IEEE International Conference on Industrial Informatics (INDIN 2018). 2018, Porto, Portugal.
+  \item 13\textsuperscript{th} International Conference on Language and Automata Theory and Applications (LATA 2019). 2019, Saint Petersburg.
+  \item IV-VII Russian Young scientists congress. 2015-2018, Saint Petersburg.
+  \item IX Young scientists congress. 2020, Saint Petersburg.
+  \item XLVI Scientific and educational-practical conference of ITMO University. 2017, Saint Petersburg.
+  \item XLVIII Scientific and educational-practical conference of ITMO University. 2019, Saint Petersburg.
+\end{enumerate}
+
+\textbf{Personal contribution.}
+The ideas of symmetry breaking predicates based on depth-first search, of the DFA inference method using these predicates, as well as implementation of an algorithm
+based on the proposed method and its experimental evaluation belong to the author.
+The idea of symmetry breaking predicates based on breadth-first search that require an asymptotically smaller number of clauses in the encoding, the idea of
+SAT encoding of BFS tree properties, and the idea of the DFA inference method that uses these results belong to the author of the thesis and Jo{\~{a}}o Marques-Silva;
+the implementation of algorithms based on proposed methods belong to the author, experimental evaluation belongs to the author and Alexey Ignatiev.
+The idea of an exact method for DFA inference from behavior examples using a reduction to SAT and counterexample-guided abstraction refinement,
+the implementation of an algorithm based on the proposed method and experimental evaluation belong to the author.
+The idea of the exact method for inferring all minimal-sized DFA from given behavior examples using SAT solvers belongs to the author and the supervisor Vladimir Ulyantsev,
+implementation of the algorithm based on the proposed method and experimental evaluation belongs to the author.
+In papers co-authored with the supervisor, Vladimir Ulyantsev, his contribution consists of the general supervision of the work.
+
+\textbf{Publications.}
+The main results of this thesis are presented in ten publications, four of which are indexed in Scopus, and one is published in a journal included into the 
+List of the Higher Attestation Commission.
+Also the author has one publication indexed in Scopus on another topic from the machine learning domain.

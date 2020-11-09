@@ -9,7 +9,7 @@
 
 %% Localization
 \usepackage[main=russian,german,english]{babel}
-\usepackage{fontspec}
+\usepackage{mathspec}
 \usepackage{iflang}
 
 
@@ -20,10 +20,15 @@
 \setsansfont{Arial}
 
 %% Page geometry
-\geometry{a5paper, top=14mm, bottom=14mm, inner=18mm, outer=10mm, footskip=5mm, nomarginpar}
+\ifafour
+  \geometry{a4paper, top=20mm, bottom=20mm, inner=25mm, outer=10mm, footskip=5mm, nomarginpar}
+\else
+  \geometry{a5paper, top=14mm, bottom=14mm, inner=18mm, outer=10mm, footskip=5mm, nomarginpar}
+\fi
 \setlength{\topskip}{0pt}
 \setlength{\footskip}{12.3pt}
 \SingleSpacing
+\setSpacing{1.42}
 
 \makeevenhead{plain}{}{\thepage}{}
 \makeoddhead{plain}{}{\thepage}{}
@@ -57,7 +62,8 @@
 \makeatother
 
 %% Fonts and intervals of the basic things
-\newcommand{\basegostsectionfont}{\fontsize{10pt}{12pt}\selectfont\bfseries}
+% \newcommand{\basegostsectionfont}{\fontsize{10pt}{12pt}\selectfont\bfseries}
+\newcommand{\basegostsectionfont}{\fontsize{14pt}{18pt}\selectfont\bfseries}
 \newlength{\gostindent}
 \setlength{\gostindent}{30pt}
 \setbeforesecskip{\gostindent}
@@ -161,7 +167,8 @@
 
 %% Paragraph formatting %%
 \usepackage{indentfirst}
-\AtBeginDocument{\setlength{\parindent}{2.5em}}
+% \AtBeginDocument{\setlength{\parindent}{2.5em}}
+\AtBeginDocument{\setlength{\parindent}{12.5mm}}
 
 %% Enumerations (partially localized) %%
 \usepackage{enumitem}

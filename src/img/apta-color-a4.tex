@@ -1,0 +1,38 @@
+\begin{tikzpicture}[
+    ->, % makes the edges directed
+    >=stealth', % makes the arrow heads bold
+    node distance=2cm, % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10, minimum size = 0pt}, % sets the properties for each ’state’ node
+    initial text=$ $, % sets the text that appears on the start arrow
+    double distance between line centers=2pt
+]
+    \def\yshift{0.47cm}
+    \def\xshift{0.26cm}
+    
+    \def\lightred{red!40}
+    \def\lightblue{blue!30}
+    \def\lightyellow{yellow!70}
+
+    \node[state, initial, fill=\lightred] (q1) {$1$};
+    \node[state, accepting, fill=\lightyellow] (q2) [above right of=q1, yshift=-\yshift, xshift=\xshift] {$2$};
+    \node[state, fill=\lightyellow] (q3) [below right of=q1, yshift=\yshift, xshift=\xshift] {$3$};
+    \node[state, fill=white, dashed, inner sep=9.7pt] (q5) [right of=q2] {};
+    \node[state, fill=\lightblue, inner sep=4.2pt] (dummy5) [right of=q2] {$5$};
+    \node[state, fill=\lightblue] (q8) [right of=q3] {$8$};
+    \node[state, fill=\lightred] (q6) [right of=q5] {$6$};
+    \node[state, fill=white, dashed, inner sep=9.7pt] (q9) [right of=q8] {};
+    \node[state, fill=\lightred, inner sep=4.2pt] (dummy9) [right of=q8] {$9$};
+    \node[state, accepting, fill=\lightyellow] (q7) [right of=q6] {$7$};
+    \node[state, accepting, fill=\lightyellow] (q4) [below of=q8, yshift=0.78cm] {$4$};
+
+    \path 
+        (q1) edge [above] node {a} (q2)
+        (q2) edge [above] node {a} (q5)
+        (q5) edge [above] node {a} (q6)
+        (q6) edge [above] node {a} (q7)
+        (q1) edge [above] node {b} (q3)
+        (q3) edge [above] node {a} (q8)
+        (q8) edge [above] node {b} (q9)
+        (q3) edge [below] node {b} (q4)
+        ;
+\end{tikzpicture}

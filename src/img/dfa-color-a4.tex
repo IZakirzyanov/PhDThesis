@@ -1,0 +1,23 @@
+\begin{tikzpicture}[
+    ->, % makes the edges directed
+    >=stealth', % makes the arrow heads bold
+    node distance=2.5cm, % specifies the minimum distance between two nodes. Change if necessary.
+    every state/.style={thick, fill=gray!10, minimum size = 0pt}, % sets the properties for each ’state’ node
+    initial text=$ $, % sets the text that appears on the start arrow
+    double distance between line centers=2pt
+]
+    \def\lightred{red!40}
+    \def\lightblue{blue!30}
+    \def\lightyellow{yellow!70}
+
+    \node[state, initial, fill=\lightred] (q1) {$1$};
+    \node[state, accepting, fill=\lightyellow] (q2) [right of=q1] {$2$};
+    \node[state,fill=\lightblue] (q3) [below of=q1, xshift=2.5cm/2, yshift=0.4cm] {$3$};
+
+    \path 
+        (q1) edge [above] node {a,b} (q2)
+        (q2) edge [right] node {a} (q3)
+             edge [loop above] node {b} (q2)
+        (q3) edge [left] node {a,b} (q1)
+        ;
+\end{tikzpicture}

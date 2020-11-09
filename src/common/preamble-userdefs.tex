@@ -57,13 +57,14 @@ yellow!90!black\\%12
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows, automata, positioning, arrows}
-\tikzset{
-  ->, % makes the edges directed
-  >=stealth', % makes the arrow heads bold
-  node distance=1.9cm, % specifies the minimum distance between two nodes. Change if necessary.
-  every state/.style={thick, fill=gray!10, minimum size = 0pt}, % sets the properties for each ’state’ node
-  initial text=$ $, % sets the text that appears on the start arrow
-}
+\usepackage{pstricks}
+% \tikzset{
+%   ->, % makes the edges directed
+%   >=stealth', % makes the arrow heads bold
+%   node distance=1.9cm, % specifies the minimum distance between two nodes. Change if necessary.
+%   every state/.style={thick, fill=gray!10, minimum size = 0pt}, % sets the properties for each ’state’ node
+%   initial text=$ $, % sets the text that appears on the start arrow
+% }
 
 % \newcommand{\inote}[1]{\medskip\noindent$[$\textcolor{darkred}{Илья}: \emph{\textcolor{middarkgrey}{#1}}$]$\medskip}
 % \newcommand{\inote}[1]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,inline]{#1}}
@@ -73,8 +74,9 @@ yellow!90!black\\%12
 % \newcommand{\needtodo}[1]{}
 
 \newcommand{\pto}{\mathrel{\ooalign{\hfil$\mapstochar$\hfil\cr$\to$\cr}}}
-%\newcommand{\chresults}[1]{\section*{Выводы по главе~#1}
-%\addcontentsline{toc}{section}{Выводы по главе~#1}
-%}
-\newcommand{\chresults}[1]{}
+\newcommand{\chresults}[1]{\section*{Выводы по главе~#1}
+\addcontentsline{toc}{section}{Выводы по главе~#1}
+}
+% \newcommand{\chresults}[1]{}
 \newcommand{\insection}[1]{В \textbf{разделе~#1}}
+\newcommand{\insectionen}[1]{In the \textbf{section~#1}}

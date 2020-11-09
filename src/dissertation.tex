@@ -1,27 +1,30 @@
+\newif\ifafour
+\afourtrue
+
 \RequirePackage[l2tabu,orthodox]{nag}
-\documentclass[a5paper,10pt,twoside,openany,article]{memoir}
+\ifafour 
+  \documentclass[a4paper,14pt,oneside,openany,article]{memoir}
+\else
+  \documentclass[a5paper,10pt,twoside,openany,article]{memoir}
+\fi
 
 \input{common/preamble-pre}
 \input{common/preamble-userdefs}
 \input{common/preamble-userdata}
 \input{common/preamble-markups}
 \input{common/preamble-post}
-% \OnehalfSpacing*
-% \setSpacing{1.42}
-\linespread{1.42}
 
 \begin{document}
 
 % Обрезка титульников
 \begin{otherlanguage}{russian}\thetitlepage\end{otherlanguage}
 % \begin{otherlanguage}{english}\thetitlepage\end{otherlanguage}
-%Оглавление
-% \ifoddpage\null\else\newpage\thispagestyle{empty}\null\newpage\fi
-% \newcounter{savedpage}
-% \addtocounter{savedpage}{5}
-\setcounter{page}{5}
 
+\ifoddpage\null\else\newpage\thispagestyle{empty}\null\newpage\fi
+\setcounter{page}{5}
 \clearpage\tableofcontents*\newpage
+\newcounter{savedpage}
+\addtocounter{savedpage}{\value{page}}
 
 % Рефераты на русском и английском языках
 \thesynopsis{russian}{Р}{labauthor:zakirzyanov}{Synopsis/content-ru}
@@ -44,21 +47,26 @@
 \newpage
 
 %%% Настройки для приложений
-% \appendix
+\appendix
 % \counterwithin{figure}{chapter}
 % \counterwithin{table}{chapter}
 %\counterwithin{algorithm}{chapter}
 %\counterwithin{lstlisting}{chapter}
-\renewcommand{\thechapter}{\Asbukx{chapter}}
+% \renewcommand{\thechapter}{\Asbukx{chapter}}
 
 % \include{Dissertation/appendix}        % Приложения
 
-\clearpage
-\chapter*{Публикации} \addcontentsline{toc}{chapter}{Публикации}
+% \clearpage
+% \chapter*{Публикации} \addcontentsline{toc}{chapter}{Публикации}
+
+\begin{refsection}
+\nociteallauthorpublications
+\urlstyle{rm}\printauthorpublicationsappendix\urlstyle{tt}
 \includepdf[pages=-,pagecommand={}]{Papers/2015-LATA.pdf}
 \includepdf[pages=-,pagecommand={}]{Papers/2017-DataMod.pdf}
 \includepdf[pages=-,pagecommand={}]{Papers/2018-Indin.pdf}
 \includepdf[pages=-,pagecommand={}]{Papers/2019-LATA.pdf}
 \includepdf[pages=-,pagecommand={}]{Papers/2020-Vestnik.pdf}
+\end{refsection}
 
 \end{document}
